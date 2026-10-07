@@ -1,0 +1,67 @@
+{
+  "decision": "eligible",
+  "reason_code": "standard_return_eligible",
+  "refund_amount_minor": 8500,
+  "restocking_fee_minor": 1500,
+  "currency": "USD",
+  "candidate_payload": {
+    "action": "refund",
+    "organization_id": "ORG-DEMO",
+    "order_id": "ORD-1002",
+    "customer_id": "CUST-1001",
+    "refund_amount_minor": 8500,
+    "restocking_fee_minor": 1500,
+    "currency": "USD",
+    "payment_method": "card",
+    "original_payment_reference": "DEMO-PAYMENT-1001"
+  },
+  "assessment_only": true,
+  "execution_allowed": false,
+  "human_approval_required_for_execution": true,
+  "rules_version": "demo-assessment-v1",
+  "ruleset_fingerprint": "34030776655202d7fc671f0dce8ef3b9574db8920e371d43316bd6bb9ac07dd3",
+  "conventions": {
+    "status": "synthetic_demo_only",
+    "currency": "USD",
+    "money_unit": "integer_cents",
+    "restocking_base": "item_amount_actually_paid_excluding_shipping_and_tax",
+    "restocking_rounding": "half_up_to_one_cent",
+    "delivery_day": "day_zero",
+    "standard_window_last_day": "delivery_plus_30_calendar_days_inclusive",
+    "damage_reporting_last_day": "delivery_plus_7_calendar_days_inclusive",
+    "ordinary_refund": "item_amount_paid_minus_applicable_restocking_fee",
+    "scope": "one_physical_item_full_return_only"
+  },
+  "citations": [
+    {
+      "source": "01_refund_policy_current.md",
+      "section": "RP-1",
+      "version": "3.0",
+      "line_start": 6,
+      "line_end": 8,
+      "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+    },
+    {
+      "source": "01_refund_policy_current.md",
+      "section": "RP-2",
+      "version": "3.0",
+      "line_start": 9,
+      "line_end": 12,
+      "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+    },
+    {
+      "source": "01_refund_policy_current.md",
+      "section": "RP-5",
+      "version": "3.0",
+      "line_start": 19,
+      "line_end": 21,
+      "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+    }
+  ],
+  "snapshot": {
+    "order_revision": 1,
+    "customer_revision": 1,
+    "requested_on": "2026-10-06",
+    "facts_sha256": "b470c57e6a6b26bdbb2e4558dcfe35f01292a4044016e7e7210bab7709289d56"
+  }
+}

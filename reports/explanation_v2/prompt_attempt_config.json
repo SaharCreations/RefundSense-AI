@@ -1,0 +1,23 @@
+{
+  "version": "extractive-explanation-v3",
+  "retrieval": {
+    "k": 5,
+    "evaluation_scope": "all",
+    "policy_api_scope": "all",
+    "assessment_scope": "current"
+  },
+  "as_of_for_evaluation": "2026-10-06",
+  "model_lock": "llm.lock.json",
+  "max_citations": 4,
+  "quote_min_characters": 12,
+  "quote_max_characters": 1000,
+  "free_form_generation": false,
+  "historical_quote_rule": "superseded document status only; never historical eligibility/fee/window sections",
+  "metric_definitions": {
+    "citation_correctness": "Emitted citations whose (source, section) is in the supplied expected label set, divided by all emitted citations. Gold-label relevance proxy, not semantic entailment or exhaustive answer correctness.",
+    "citation_verbatim_support": "Emitted quotes found verbatim after whitespace normalization in their retrieved source, divided by all emitted quotes. Does not prove relevance or policy sufficiency.",
+    "abstention_accuracy": "Final answer/abstain behavior equal to supplied expected_behavior, divided by all questions; blocked model outputs count as abstention.",
+    "answerable_coverage": "Answerable questions receiving an answer, divided by all answerable questions. Correctness is not implied."
+  },
+  "freeze": "Development-only iteration from explanation-v2. Original heldout is already observed and must only be reported as a regression diagnostic. New supplementary heldout is run only after protocol freeze; authored by the implementer, not blind/independent."
+}

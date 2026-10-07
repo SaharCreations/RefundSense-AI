@@ -1,0 +1,171 @@
+{
+  "experiment": "Development replay: same prompt/model, remove JSON grammar; strict server validator unchanged",
+  "question_ids": [
+    "Q01",
+    "Q03",
+    "Q25",
+    "Q28"
+  ],
+  "selector": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+    "quantization": "Q4_K_M",
+    "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+    "runtime": "0.3.36",
+    "inference": {
+      "n_ctx": 4096,
+      "n_threads": 2,
+      "n_gpu_layers": 0,
+      "temperature": 0.0,
+      "seed": 17,
+      "max_tokens": 512,
+      "chat_format": "chatml"
+    },
+    "prompt_sha256": "ddf80d349ca5caf7684933248c0c9cffc14582e9001be73c3d8bc40cd63b1755",
+    "schema_sha256": "d1cac291e6f649cd60047c9ed8ec81bc758a47c309645c2d54be2d5cd74799a3",
+    "fingerprint": "b76cc6f099a40bc37481a1b174c84ee38e8fdf4a771aa6c4abd94bdec040e1a3"
+  },
+  "cases": [
+    {
+      "id": "Q01",
+      "raw": "{\"citations\":[{\"evidence_id\":\"E2\",\"quote\":\"Most products may be returned within 30 calendar days of delivery.\"},{\"evidence_id\":\"E3\",\"quote\":\"Opened electronics may be returned within 30 calendar days of delivery.\\nA 15% restocking fee normally applies.\"}],\"status\":\"answer\"}",
+      "finish_reason": "stop",
+      "answer": {
+        "status": "answered",
+        "explanation": "Most products may be returned within 30 calendar days of delivery. [01_refund_policy_current.md#RP-1]\n\nOpened electronics may be returned within 30 calendar days of delivery. A 15% restocking fee normally applies. [01_refund_policy_current.md#RP-2]",
+        "citations": [
+          {
+            "evidence_id": "E2",
+            "quote": "Most products may be returned within 30 calendar days of delivery.",
+            "chunk_id": "d517e534958e444f47d0d740a00f6d0d470d79e64619441adc20b72f29ce9b58",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-1",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "b8a703db9c7d58e1c48fc770f669986838e1ee7d1b9e86aa76dba6d3cd2c7aad",
+            "line_start": 6,
+            "line_end": 8
+          },
+          {
+            "evidence_id": "E3",
+            "quote": "Opened electronics may be returned within 30 calendar days of delivery. A 15% restocking fee normally applies.",
+            "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-2",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+            "line_start": 9,
+            "line_end": 12
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true
+      }
+    },
+    {
+      "id": "Q03",
+      "raw": "{\"citations\":[{\"evidence_id\":\"E4\",\"quote\":\"Premium customers do not pay the 15% restocking fee on opened electronics.\"}],\"status\":\"answer\"}",
+      "finish_reason": "stop",
+      "answer": {
+        "status": "answered",
+        "explanation": "Premium customers do not pay the 15% restocking fee on opened electronics. [01_refund_policy_current.md#RP-3]",
+        "citations": [
+          {
+            "evidence_id": "E4",
+            "quote": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+            "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-3",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+            "line_start": 13,
+            "line_end": 15
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true
+      }
+    },
+    {
+      "id": "Q25",
+      "raw": "{\"citations\":[{\"evidence_id\":\"E1\",\"source\":\"01_refund_policy_current.md\",\"section\":\"RP-4\",\"text\":\"Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.\"},{\"evidence_id\":\"E2\",\"source\":\"01_refund_policy_current.md\",\"section\":\"document status\",\"text\":\"Version: 3.0\\nEffective date: 2026-09-01\\nStatus: CURRENT\"},{\"evidence_id\":\"E3\",\"source\":\"05_approval_and_execution_policy.md\",\"section\":\"AE-3\",\"text\":\"Immediately before execution, the system must re-read the current order state and re-run deterministic refund rules.\"},{\"evidence_id\":\"E4\",\"source\":\"05_approval_and_execution_policy.md\",\"section\":\"document status\",\"text\":\"Version: 1.0\\nEffective date: 2026-09-01\\nStatus: CURRENT\"},{\"evidence_id\":\"E5\",\"source\":\"05_approval_and_execution_policy.md\",\"section\":\"AE-5\",\"text\":\"Every refund execution must include a unique idempotency key. Reusing the same approval must not create a second refund.\"}],\"status\":\"answer\"}",
+      "finish_reason": "stop",
+      "answer": {
+        "status": "abstain",
+        "explanation": "Policy evidence is insufficient or failed validation. Human review is required.",
+        "citations": [],
+        "abstention_reason": "invalid_model_schema",
+        "human_review_required": true,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true
+      }
+    },
+    {
+      "id": "Q28",
+      "raw": "{\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.\"},{\"evidence_id\":\"E2\",\"quote\":\"Approved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.\"},{\"evidence_id\":\"E5\",\"quote\":\"Premium customers do not pay the 15% restocking fee on opened electronics.\"}],\"status\":\"answer\"}",
+      "finish_reason": "stop",
+      "answer": {
+        "status": "answered",
+        "explanation": "Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival. [01_refund_policy_current.md#RP-4]\n\nApproved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item. [01_refund_policy_current.md#RP-5]\n\nPremium customers do not pay the 15% restocking fee on opened electronics. [01_refund_policy_current.md#RP-3]",
+        "citations": [
+          {
+            "evidence_id": "E1",
+            "quote": "Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+            "chunk_id": "bc8e11884f412c8ee3db919c0da4937d47f6838d957815dbcd56fca8bb8c06d3",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-4",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "477c314229fbb974e765023d69dfab73fb6fc1e15a2861b06949790cceecb9fc",
+            "line_start": 16,
+            "line_end": 18
+          },
+          {
+            "evidence_id": "E2",
+            "quote": "Approved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.",
+            "chunk_id": "bd9850073744f7e69fa169f27619aa94063f41082c18a57e6b22d9bb8aba9cb9",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-5",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "d30f228bc780b0be16688189b06dceaa7fea6a20d5067bc289f5e44520db9ebc",
+            "line_start": 19,
+            "line_end": 21
+          },
+          {
+            "evidence_id": "E5",
+            "quote": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+            "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-3",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+            "line_start": 13,
+            "line_end": 15
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true
+      }
+    }
+  ]
+}

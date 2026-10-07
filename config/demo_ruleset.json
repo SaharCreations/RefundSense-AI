@@ -1,0 +1,22 @@
+{
+  "bundle_id": "sampleco-september-2026",
+  "rules_version": "demo-assessment-v1",
+  "conventions": {
+    "status": "synthetic_demo_only",
+    "currency": "USD",
+    "money_unit": "integer_cents",
+    "restocking_base": "item_amount_actually_paid_excluding_shipping_and_tax",
+    "restocking_rounding": "half_up_to_one_cent",
+    "delivery_day": "day_zero",
+    "standard_window_last_day": "delivery_plus_30_calendar_days_inclusive",
+    "damage_reporting_last_day": "delivery_plus_7_calendar_days_inclusive",
+    "ordinary_refund": "item_amount_paid_minus_applicable_restocking_fee",
+    "scope": "one_physical_item_full_return_only"
+  },
+  "policy_source_sha256": {
+    "01_refund_policy_current.md": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+    "03_warranty_policy.md": "db59e7f8c12114faefa2f2e2284b9d579e4fd1b154cd7bb9632d1f482bd1cde2",
+    "04_premium_customer_policy.md": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+    "07_shipping_policy.md": "5ca124cec0f3fe445bdd90bb84e8980b0e26750208d0004198ca54c6aa533613"
+  }
+}

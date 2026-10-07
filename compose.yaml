@@ -1,0 +1,57 @@
+name: refundguard
+services:
+  db:
+    image: pgvector/pgvector:0.8.1-pg17@sha256:3e8b3adfd27b5707128f60956f62a793c3c9326ea8cfaf0eab7adccb5d700b21
+    environment:
+      POSTGRES_USER: refundguard
+      POSTGRES_DB: refundguard
+      POSTGRES_PASSWORD_FILE: /run/secrets/database_password
+    secrets: [database_password]
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U refundguard -d refundguard']
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  api:
+    build:
+      context: .
+      dockerfile: infra/docker/api.Dockerfile
+    environment:
+      PGHOST: db
+      PGPORT: '5432'
+      PGDATABASE: refundguard
+      PGUSER: refundguard
+      PGPASSWORD_FILE: /run/secrets/database_password
+      REFUNDGUARD_MODEL_DIR: /app/.cache/model
+    secrets: [database_password]
+    volumes:
+      - ./.cache/model:/app/.cache/model:ro
+    ports: ['127.0.0.1:8000:8000']
+    depends_on:
+      db: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, -c, 'import urllib.request; urllib.request.urlopen("http://127.0.0.1:8000/health", timeout=3)']
+      interval: 5s
+      timeout: 4s
+      retries: 30
+    init: true
+    restart: unless-stopped
+  web:
+    build:
+      context: ./frontend
+      target: development
+    environment:
+      REFUNDGUARD_API_URL: http://api:8000
+      NEXT_TELEMETRY_DISABLED: '1'
+    ports: ['127.0.0.1:3000:3000']
+    depends_on:
+      api: {condition: service_healthy}
+    init: true
+    restart: unless-stopped
+volumes:
+  database:
+secrets:
+  database_password:
+    file: ./.local/database_password

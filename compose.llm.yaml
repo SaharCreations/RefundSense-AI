@@ -1,0 +1,9 @@
+services:
+  api:
+    build:
+      args:
+        INSTALL_LLM: '1'
+    environment:
+      REFUNDGUARD_LLM_MODEL: /app/.cache/llm/qwen2.5-1.5b-instruct-q4_k_m.gguf
+    volumes:
+      - ./.cache/llm:/app/.cache/llm:ro

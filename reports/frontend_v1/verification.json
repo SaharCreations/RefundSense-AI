@@ -1,0 +1,36 @@
+{
+  "scope": "frontend contracts only; actual Next.js browser against synthetic HTTP fixture; upstream responses substituted in unit tests",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "packages": {
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "typescript": "5.9.3",
+    "@playwright/test": "1.63.0",
+    "tsx": "4.23.15"
+  },
+  "browser": "Chromium 153.0.8010.0 via temporary @sparticuz/chromium 153.0.0 package; standard browser download was unavailable",
+  "typecheck": "passed",
+  "production_build": "passed",
+  "unit_checks": {
+    "passed": 11,
+    "failed": 0
+  },
+  "browser_checks": {
+    "startTime": "2026-10-07T02:33:30.423Z",
+    "duration": 8079.896,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "previous_reports_verified_unchanged": 61,
+  "starter_and_default_models_verified_unchanged": 17,
+  "live_fastapi_sql_model_executed": false,
+  "pending": [
+    "Native PostgreSQL trigger and concurrency gates",
+    "Browser-to-FastAPI-to-PostgreSQL integration",
+    "Docker and GitHub Actions"
+  ]
+}

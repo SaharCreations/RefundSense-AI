@@ -1,0 +1,47 @@
+INFO:     Started server process [2939]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:37767 (Press CTRL+C to quit)
+INFO:     127.0.0.1:44864 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/workflows/1373d159-565b-4939-a2c3-161c8bdb53d3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows/1373d159-565b-4939-a2c3-161c8bdb53d3/decisions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows/1373d159-565b-4939-a2c3-161c8bdb53d3/decisions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/workflows/1373d159-565b-4939-a2c3-161c8bdb53d3/audit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59920 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/workflows/1373d159-565b-4939-a2c3-161c8bdb53d3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/workflows/e053e9d8-9781-4fb8-989d-ecf6aec94166 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows/e053e9d8-9781-4fb8-989d-ecf6aec94166/decisions HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:59910 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/workflows/841aebea-1b92-49f0-ba07-38a052be75c6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows/841aebea-1b92-49f0-ba07-38a052be75c6/decisions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/workflows/63afbaee-6e92-4963-b38a-5cf989d306c4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows/63afbaee-6e92-4963-b38a-5cf989d306c4/decisions HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows/63afbaee-6e92-4963-b38a-5cf989d306c4/recover HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/policy/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/assessments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "POST /api/v1/workflows HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50280 - "POST /api/v1/policy/search HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2939]

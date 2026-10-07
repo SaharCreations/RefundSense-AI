@@ -1,0 +1,44 @@
+{
+  "status": "ingested",
+  "collection_id": "ad1f2acb7bc2a94f71677d00bf5e6d193426e5db0072e7a73e29be4a93338e5d",
+  "parser_version": "headings-v1",
+  "corpus_sha256": "748a192d4ede2e353fa36b4d9c462a035399692dad324279162c775600a2cf4a",
+  "files": {
+    "01_refund_policy_current.md": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+    "02_refund_policy_superseded.md": "fb91c0c261c688b77a02020b9100268f208ba5d50cded688ab94f7d07516c1c3",
+    "03_warranty_policy.md": "db59e7f8c12114faefa2f2e2284b9d579e4fd1b154cd7bb9632d1f482bd1cde2",
+    "04_premium_customer_policy.md": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+    "05_approval_and_execution_policy.md": "ce52882da4d6631955117204f1db72c26b09019ea8f60db6bb44a8da398b56c8",
+    "06_ai_safety_policy.md": "8db66c9120ff6939a3a370839e154e3c48d8bf90af8a314981f0cc73f3d4863f",
+    "07_shipping_policy.md": "5ca124cec0f3fe445bdd90bb84e8980b0e26750208d0004198ca54c6aa533613"
+  },
+  "documents": 7,
+  "chunks": 36,
+  "chunk_ids_sha256": "9d2886abed9c3dddd592c37ba56f2753e114c284eb9a4bb4787a004552108f65",
+  "embedding": {
+    "provider": "fastembed",
+    "model": "BAAI/bge-small-en-v1.5",
+    "dimensions": 384,
+    "fastembed_version": "0.8.1",
+    "onnxruntime_version": "1.30.0",
+    "numpy_version": "2.5.3",
+    "execution_provider": "CPUExecutionProvider",
+    "normalized": true,
+    "document_method": "passage_embed",
+    "query_method": "query_embed",
+    "max_tokens": 512,
+    "artifacts": {
+      "config.json": "13582bcf2effc85b7bf3d3f5532e686bc1c9ce86bb009d10f0ec33cbe92299dd",
+      "model_optimized.onnx": "51f1bd0addd6e859e42c2c8021a5e5461385bb676a649f4b269aa445449f2431",
+      "special_tokens_map.json": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+      "tokenizer_config.json": "0b29c7bfc889e53b36d9dd3e686dd4300f6525110eaa98c76a5dafceb2029f53"
+    },
+    "fingerprint": "b98ec67a60f92da808d4ac2a8b3a9943cfa92de6ac416391804f7707254b3dc6"
+  },
+  "runtime": {
+    "postgres_version": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+    "pgvector_version": "0.8.1",
+    "dimensions": 384
+  }
+}

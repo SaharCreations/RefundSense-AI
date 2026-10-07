@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "created_before_retrieval": true,
+  "method": "Fixed question-level split, chosen before any retrieval results. Categories appear in both splits. Near-paraphrase groups Q02/Q13, Q11/Q23, and Q20/Q24 stay together.",
+  "limitations": "Only 30 synthetic questions. The supplied labels were inspected for schema validation; this is a held-out query split, not a blind or unseen-policy benchmark. Freeze configuration before scoring heldout; use new held-out questions after tuning to it.",
+  "dev": ["Q01", "Q03", "Q05", "Q06", "Q07", "Q08", "Q10", "Q11", "Q12", "Q14", "Q16", "Q17", "Q18", "Q21", "Q22", "Q23", "Q25", "Q26", "Q28", "Q30"],
+  "heldout": ["Q02", "Q04", "Q09", "Q13", "Q15", "Q19", "Q20", "Q24", "Q27", "Q29"]
+}

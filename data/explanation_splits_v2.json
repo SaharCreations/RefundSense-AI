@@ -1,0 +1,40 @@
+{
+  "version": "explanation-supplement-v1",
+  "dev": [
+    "Q01",
+    "Q03",
+    "Q05",
+    "Q06",
+    "Q07",
+    "Q08",
+    "Q10",
+    "Q11",
+    "Q12",
+    "Q14",
+    "Q16",
+    "Q17",
+    "Q18",
+    "Q21",
+    "Q22",
+    "Q23",
+    "Q25",
+    "Q26",
+    "Q28",
+    "Q30"
+  ],
+  "heldout": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11",
+    "S12"
+  ],
+  "note": "Supplementary synthetic heldout authored from policy by implementer before generation. Not blind or independently reviewed. Original heldout already observed; original data unchanged. Use dev only for tuning."
+}

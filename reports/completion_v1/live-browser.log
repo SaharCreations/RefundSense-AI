@@ -1,0 +1,14 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+Running 6 tests using 1 worker
+
+(node:3062) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/live/stack.spec.ts:33:5 › human-reviewed payload executes once, SQL audit persists, repeated decision is idempotent (2.1s)
+  ✓  2 tests/live/stack.spec.ts:74:5 › support cannot approve even through a direct authenticated request (781ms)
+  ✓  3 tests/live/stack.spec.ts:95:5 › reviewer rejects an exact pending request without a refund (978ms)
+  ✓  4 tests/live/stack.spec.ts:106:5 › different payload hash is rejected and pending request cannot execute through recovery (870ms)
+  ✓  5 tests/live/stack.spec.ts:127:5 › current dense policy evidence comes from the real pgvector index (1.4s)
+  ✓  6 tests/live/stack.spec.ts:142:7 › record real demo: SQL assessment, immutable pending payload, policy evidence (16.9s)
+
+  6 passed (23.6s)

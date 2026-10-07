@@ -1,0 +1,20 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "repository": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+  "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+  "filename": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+  "quantization": "Q4_K_M",
+  "size_bytes": 1117320736,
+  "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+  "license": "apache-2.0",
+  "runtime": "llama-cpp-python==0.3.36",
+  "inference": {
+    "n_ctx": 4096,
+    "n_threads": 2,
+    "n_gpu_layers": 0,
+    "temperature": 0.0,
+    "seed": 17,
+    "max_tokens": 512,
+    "chat_format": "chatml"
+  }
+}

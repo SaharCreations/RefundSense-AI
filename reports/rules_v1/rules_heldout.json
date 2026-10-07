@@ -1,0 +1,196 @@
+{
+  "status": "measured",
+  "measured_at_utc": "2026-10-06T23:44:28.587279+00:00",
+  "split": "heldout",
+  "count": 10,
+  "passed": 10,
+  "rules_engine_accuracy": 1.0,
+  "definition": "Exact match of decision, reason code, refund cents, and fee cents.",
+  "case_data_sha256": "f0da648f40f85069f1487b61be2d4a9a211ab9f87862a153c98b082c668029a3",
+  "ruleset_fingerprint": "34030776655202d7fc671f0dce8ef3b9574db8920e371d43316bd6bb9ac07dd3",
+  "conventions": {
+    "status": "synthetic_demo_only",
+    "currency": "USD",
+    "money_unit": "integer_cents",
+    "restocking_base": "item_amount_actually_paid_excluding_shipping_and_tax",
+    "restocking_rounding": "half_up_to_one_cent",
+    "delivery_day": "day_zero",
+    "standard_window_last_day": "delivery_plus_30_calendar_days_inclusive",
+    "damage_reporting_last_day": "delivery_plus_7_calendar_days_inclusive",
+    "ordinary_refund": "item_amount_paid_minus_applicable_restocking_fee",
+    "scope": "one_physical_item_full_return_only"
+  },
+  "limitations": "30 hand-labeled synthetic scenarios for the documented demo conventions. Fixed 20 dev / 10 held-out case split, not a blind external benchmark. Scores do not verify payment execution, native database isolation, or production policy approval.",
+  "cases": [
+    {
+      "id": "R21",
+      "description": "Ten cents times 15 percent rounds half up from 1.5 to two cents",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "standard_return_eligible",
+        "refund_amount_minor": 8,
+        "restocking_fee_minor": 2
+      },
+      "actual": {
+        "decision": "eligible",
+        "reason_code": "standard_return_eligible",
+        "refund_amount_minor": 8,
+        "restocking_fee_minor": 2
+      },
+      "passed": true
+    },
+    {
+      "id": "R22",
+      "description": "Premium waives the fee for timely reported damaged final-sale electronics, even after day 30",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "damaged_on_arrival_exception",
+        "refund_amount_minor": 10000,
+        "restocking_fee_minor": 0
+      },
+      "actual": {
+        "decision": "eligible",
+        "reason_code": "damaged_on_arrival_exception",
+        "refund_amount_minor": 10000,
+        "restocking_fee_minor": 0
+      },
+      "passed": true
+    },
+    {
+      "id": "R23",
+      "description": "A late damage report can still use ordinary return eligibility on day 30",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "standard_return_eligible",
+        "refund_amount_minor": 10000,
+        "restocking_fee_minor": 0
+      },
+      "actual": {
+        "decision": "eligible",
+        "reason_code": "standard_return_eligible",
+        "refund_amount_minor": 10000,
+        "restocking_fee_minor": 0
+      },
+      "passed": true
+    },
+    {
+      "id": "R24",
+      "description": "Future delivery date is inconsistent",
+      "expected": {
+        "decision": "review",
+        "reason_code": "delivery_date_in_future",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "actual": {
+        "decision": "review",
+        "reason_code": "delivery_date_in_future",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "passed": true
+    },
+    {
+      "id": "R25",
+      "description": "Multiple-item allocations are outside this demo",
+      "expected": {
+        "decision": "review",
+        "reason_code": "unsupported_product_or_multi_item_order",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "actual": {
+        "decision": "review",
+        "reason_code": "unsupported_product_or_multi_item_order",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "passed": true
+    },
+    {
+      "id": "R26",
+      "description": "Tax treatment is not defined",
+      "expected": {
+        "decision": "review",
+        "reason_code": "tax_refund_policy_missing",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "actual": {
+        "decision": "review",
+        "reason_code": "tax_refund_policy_missing",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "passed": true
+    },
+    {
+      "id": "R27",
+      "description": "Unsupported currency needs review",
+      "expected": {
+        "decision": "review",
+        "reason_code": "unsupported_currency",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "actual": {
+        "decision": "review",
+        "reason_code": "unsupported_currency",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "passed": true
+    },
+    {
+      "id": "R28",
+      "description": "Existing pending refund prevents another eligible candidate",
+      "expected": {
+        "decision": "review",
+        "reason_code": "existing_refund_state_needs_review",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "actual": {
+        "decision": "review",
+        "reason_code": "existing_refund_state_needs_review",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "passed": true
+    },
+    {
+      "id": "R29",
+      "description": "Missing opened status cannot be guessed",
+      "expected": {
+        "decision": "review",
+        "reason_code": "opened_flag_missing",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "actual": {
+        "decision": "review",
+        "reason_code": "opened_flag_missing",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "passed": true
+    },
+    {
+      "id": "R30",
+      "description": "Knowing another organization order ID gives no access",
+      "expected": {
+        "decision": "unavailable",
+        "reason_code": "record_unavailable",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "actual": {
+        "decision": "unavailable",
+        "reason_code": "record_unavailable",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "passed": true
+    }
+  ]
+}

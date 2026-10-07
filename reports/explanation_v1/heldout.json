@@ -1,0 +1,2019 @@
+{
+  "status": "measured",
+  "split": "heldout",
+  "questions": 10,
+  "generated_at": "2026-10-07T00:39:53.217094+00:00",
+  "as_of": "2026-10-06",
+  "collection_id": "ad1f2acb7bc2a94f71677d00bf5e6d193426e5db0072e7a73e29be4a93338e5d",
+  "embedding": {
+    "provider": "fastembed",
+    "model": "BAAI/bge-small-en-v1.5",
+    "dimensions": 384,
+    "fastembed_version": "0.8.1",
+    "onnxruntime_version": "1.30.0",
+    "numpy_version": "2.5.3",
+    "execution_provider": "CPUExecutionProvider",
+    "normalized": true,
+    "document_method": "passage_embed",
+    "query_method": "query_embed",
+    "max_tokens": 512,
+    "artifacts": {
+      "config.json": "13582bcf2effc85b7bf3d3f5532e686bc1c9ce86bb009d10f0ec33cbe92299dd",
+      "model_optimized.onnx": "51f1bd0addd6e859e42c2c8021a5e5461385bb676a649f4b269aa445449f2431",
+      "special_tokens_map.json": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+      "tokenizer_config.json": "0b29c7bfc889e53b36d9dd3e686dd4300f6525110eaa98c76a5dafceb2029f53"
+    },
+    "fingerprint": "b98ec67a60f92da808d4ac2a8b3a9943cfa92de6ac416391804f7707254b3dc6"
+  },
+  "selector": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+    "quantization": "Q4_K_M",
+    "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+    "runtime": "0.3.36",
+    "inference": {
+      "n_ctx": 4096,
+      "n_threads": 2,
+      "n_gpu_layers": 0,
+      "temperature": 0.0,
+      "seed": 17,
+      "max_tokens": 512,
+      "chat_format": "chatml"
+    },
+    "prompt_sha256": "ddf80d349ca5caf7684933248c0c9cffc14582e9001be73c3d8bc40cd63b1755",
+    "schema_sha256": "d1cac291e6f649cd60047c9ed8ec81bc758a47c309645c2d54be2d5cd74799a3",
+    "fingerprint": "b76cc6f099a40bc37481a1b174c84ee38e8fdf4a771aa6c4abd94bdec040e1a3"
+  },
+  "protocol": {
+    "version": "extractive-explanation-v2",
+    "retrieval": {
+      "k": 5,
+      "evaluation_scope": "all",
+      "policy_api_scope": "all",
+      "assessment_scope": "current"
+    },
+    "as_of_for_evaluation": "2026-10-06",
+    "model_lock": "llm.lock.json",
+    "max_citations": 4,
+    "quote_min_characters": 12,
+    "quote_max_characters": 1000,
+    "free_form_generation": false,
+    "historical_quote_rule": "superseded document status only; never historical eligibility/fee/window sections",
+    "metric_definitions": {
+      "citation_correctness": "Emitted citations whose (source, section) is in the supplied expected label set, divided by all emitted citations. Gold-label relevance proxy, not semantic entailment or exhaustive answer correctness.",
+      "citation_verbatim_support": "Emitted quotes found verbatim after whitespace normalization in their retrieved source, divided by all emitted quotes. Does not prove relevance or policy sufficiency.",
+      "abstention_accuracy": "Final answer/abstain behavior equal to supplied expected_behavior, divided by all questions; blocked model outputs count as abstention.",
+      "answerable_coverage": "Answerable questions receiving an answer, divided by all answerable questions. Correctness is not implied."
+    },
+    "freeze": "Written before explanation generation/evaluation. Original labels and retrieval heldout have already been inspected; this is not a fresh blind benchmark. No tuning on explanation heldout outcomes."
+  },
+  "protocol_sha256": "37e253385b31dffc266a366981cd090b70f5f5be26c2d5d3ab18f3688363517b",
+  "runtime": {
+    "postgres_version": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+    "pgvector_version": "0.8.1",
+    "dimensions": 384
+  },
+  "metrics": {
+    "citation_correctness": {
+      "numerator": 7,
+      "denominator": 22,
+      "value": 0.3181818181818182
+    },
+    "citation_verbatim_support": {
+      "numerator": 22,
+      "denominator": 22,
+      "value": 1.0
+    },
+    "abstention_accuracy": {
+      "numerator": 8,
+      "denominator": 10,
+      "value": 0.8
+    },
+    "answerable_coverage": {
+      "numerator": 8,
+      "denominator": 8,
+      "value": 1.0
+    },
+    "unanswerable_abstention_rate": {
+      "numerator": 0,
+      "denominator": 2,
+      "value": 0.0
+    },
+    "behavior_counts": {
+      "answerable_answered": 8,
+      "answerable_abstained": 0,
+      "unanswerable_abstained": 0,
+      "unanswerable_answered": 2
+    },
+    "model_outputs_blocked": 0
+  },
+  "cases": [
+    {
+      "id": "Q02",
+      "category": "standard",
+      "question": "What fee normally applies to opened electronics?",
+      "expected_behavior": "answer",
+      "expected_labels": [
+        [
+          "01_refund_policy_current.md",
+          "RP-2"
+        ]
+      ],
+      "expected_answer": "15% restocking fee",
+      "retrieved": [
+        {
+          "text": "Opened electronics are subject to a 20% restocking fee.\n\nIMPORTANT: This document is historical. It must not be used for refund decisions on requests governed by the current policy.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "02_refund_policy_superseded.md",
+          "status": "SUPERSEDED",
+          "heading": "OLD-RP-2 Opened Electronics",
+          "section": "OLD-RP-2",
+          "version": "2.0",
+          "chunk_id": "2239173a724c495bee8e6438d160a91a719fc634ef80d5422ddec12b214ec4cb",
+          "line_end": 13,
+          "line_start": 10,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "OLD-RP-2 Opened Electronics"
+          ],
+          "source_sha256": "fb91c0c261c688b77a02020b9100268f208ba5d50cded688ab94f7d07516c1c3",
+          "content_sha256": "923b2f49ae86c97a08ac46525f24e60c5aa27d71166852ec9d39653143f5efac",
+          "effective_date": "2026-01-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 2.0\nStatus: SUPERSEDED\nEffective date: 2026-01-01\nSuperseded date: 2026-08-31\nOLD-RP-2 Opened Electronics\nOpened electronics are subject to a 20% restocking fee.\n\nIMPORTANT: This document is historical. It must not be used for refund decisions on requests governed by the current policy.",
+          "superseded_date": "2026-08-31",
+          "rank": 1,
+          "cosine_distance": 0.23946384309123636,
+          "cosine_similarity": 0.7605361569087636,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Opened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-2 Opened Electronics",
+          "section": "RP-2",
+          "version": "3.0",
+          "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+          "line_end": 12,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-2 Opened Electronics"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-2 Opened Electronics\nOpened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "superseded_date": null,
+          "rank": 2,
+          "cosine_distance": 0.2500628605503613,
+          "cosine_similarity": 0.7499371394496387,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-3 Premium Customer Exception",
+          "section": "RP-3",
+          "version": "3.0",
+          "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+          "line_end": 15,
+          "line_start": 13,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-3 Premium Customer Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-3 Premium Customer Exception\nPremium customers do not pay the 15% restocking fee on opened electronics.",
+          "superseded_date": null,
+          "rank": 3,
+          "cosine_distance": 0.32659300128178714,
+          "cosine_similarity": 0.6734069987182129,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Verified Premium customers have the opened-electronics restocking fee waived.",
+          "title": "SampleCo Retail — Premium Customer Policy",
+          "source": "04_premium_customer_policy.md",
+          "status": "CURRENT",
+          "heading": "PC-2 Restocking Benefit",
+          "section": "PC-2",
+          "version": "2.1",
+          "chunk_id": "8091d60b69c0d314c80d38ccca52b7cf07bbe595de2594e1ceb1cd3ce59d2b51",
+          "line_end": 11,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Premium Customer Policy",
+            "PC-2 Restocking Benefit"
+          ],
+          "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+          "content_sha256": "86215419266c8d63f598194dbbcaa8f09732a66eaf303d3bb704042de7789613",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Premium Customer Policy\nVersion: 2.1\nStatus: CURRENT\nEffective date: 2026-09-01\nPC-2 Restocking Benefit\nVerified Premium customers have the opened-electronics restocking fee waived.",
+          "superseded_date": null,
+          "rank": 4,
+          "cosine_distance": 0.3281609024809715,
+          "cosine_similarity": 0.6718390975190285,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "If an electronic product becomes defective after the 30-day return window, the customer may be directed to warranty service. This does not automatically create refund eligibility.",
+          "title": "SampleCo Retail — Warranty Policy",
+          "source": "03_warranty_policy.md",
+          "status": "CURRENT",
+          "heading": "WP-2 Defective After Return Window",
+          "section": "WP-2",
+          "version": "1.4",
+          "chunk_id": "7e48a427a8f7ffe55b222ede2a6494650f1a066aa02db12a48c4b03a09a81c91",
+          "line_end": 11,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Warranty Policy",
+            "WP-2 Defective After Return Window"
+          ],
+          "source_sha256": "db59e7f8c12114faefa2f2e2284b9d579e4fd1b154cd7bb9632d1f482bd1cde2",
+          "content_sha256": "ec5060d1e69c1e236a1189f7bb790e9e9cb752ff7ef9450e96d21439812fe27b",
+          "effective_date": "2026-06-15",
+          "embedding_text": "SampleCo Retail — Warranty Policy\nVersion: 1.4\nStatus: CURRENT\nEffective date: 2026-06-15\nWP-2 Defective After Return Window\nIf an electronic product becomes defective after the 30-day return window, the customer may be directed to warranty service. This does not automatically create refund eligibility.",
+          "superseded_date": null,
+          "rank": 5,
+          "cosine_distance": 0.3893105519639788,
+          "cosine_similarity": 0.6106894480360212,
+          "untrusted_reference_material": true
+        }
+      ],
+      "answer": {
+        "status": "answered",
+        "explanation": "A 15% restocking fee normally applies. [01_refund_policy_current.md#RP-2]",
+        "citations": [
+          {
+            "evidence_id": "E2",
+            "quote": "A 15% restocking fee normally applies.",
+            "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-2",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+            "line_start": 9,
+            "line_end": 12
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true,
+        "generation": {
+          "raw": "{\"citations\":[{\"evidence_id\":\"E2\",\"quote\":\"A 15% restocking fee normally applies.\"}],\"status\":\"answer\"}",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 507,
+            "completion_tokens": 30,
+            "total_tokens": 537
+          }
+        }
+      }
+    },
+    {
+      "id": "Q04",
+      "category": "standard",
+      "question": "Does Premium membership extend the return window?",
+      "expected_behavior": "answer",
+      "expected_labels": [
+        [
+          "04_premium_customer_policy.md",
+          "PC-3"
+        ]
+      ],
+      "expected_answer": "No. The standard 30-day window still applies.",
+      "retrieved": [
+        {
+          "text": "Premium membership does not extend the standard 30-day return window.",
+          "title": "SampleCo Retail — Premium Customer Policy",
+          "source": "04_premium_customer_policy.md",
+          "status": "CURRENT",
+          "heading": "PC-3 No Extended Window",
+          "section": "PC-3",
+          "version": "2.1",
+          "chunk_id": "c26d4e574d0dbace37667e982844839e8fd815c6bbe4d1d1d3607639e418c7ce",
+          "line_end": 13,
+          "line_start": 12,
+          "heading_path": [
+            "SampleCo Retail — Premium Customer Policy",
+            "PC-3 No Extended Window"
+          ],
+          "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+          "content_sha256": "436db54966c3b3214e9c9ffd50223a180f4faac2c0b77e04910d0c04ec86b80e",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Premium Customer Policy\nVersion: 2.1\nStatus: CURRENT\nEffective date: 2026-09-01\nPC-3 No Extended Window\nPremium membership does not extend the standard 30-day return window.",
+          "superseded_date": null,
+          "rank": 1,
+          "cosine_distance": 0.26118027518809694,
+          "cosine_similarity": 0.7388197248119031,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-3 Premium Customer Exception",
+          "section": "RP-3",
+          "version": "3.0",
+          "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+          "line_end": 15,
+          "line_start": 13,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-3 Premium Customer Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-3 Premium Customer Exception\nPremium customers do not pay the 15% restocking fee on opened electronics.",
+          "superseded_date": null,
+          "rank": 2,
+          "cosine_distance": 0.3723979101056213,
+          "cosine_similarity": 0.6276020898943787,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Verified Premium customers have the opened-electronics restocking fee waived.",
+          "title": "SampleCo Retail — Premium Customer Policy",
+          "source": "04_premium_customer_policy.md",
+          "status": "CURRENT",
+          "heading": "PC-2 Restocking Benefit",
+          "section": "PC-2",
+          "version": "2.1",
+          "chunk_id": "8091d60b69c0d314c80d38ccca52b7cf07bbe595de2594e1ceb1cd3ce59d2b51",
+          "line_end": 11,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Premium Customer Policy",
+            "PC-2 Restocking Benefit"
+          ],
+          "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+          "content_sha256": "86215419266c8d63f598194dbbcaa8f09732a66eaf303d3bb704042de7789613",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Premium Customer Policy\nVersion: 2.1\nStatus: CURRENT\nEffective date: 2026-09-01\nPC-2 Restocking Benefit\nVerified Premium customers have the opened-electronics restocking fee waived.",
+          "superseded_date": null,
+          "rank": 3,
+          "cosine_distance": 0.38099587389788536,
+          "cosine_similarity": 0.6190041261021146,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Most products may be returned within 45 calendar days of delivery.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "02_refund_policy_superseded.md",
+          "status": "SUPERSEDED",
+          "heading": "OLD-RP-1 Standard Return Window",
+          "section": "OLD-RP-1",
+          "version": "2.0",
+          "chunk_id": "874d9bc666f2c698f2759af0cc960b0741f812fdbbace655a823a49f31f4d1b0",
+          "line_end": 9,
+          "line_start": 7,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "OLD-RP-1 Standard Return Window"
+          ],
+          "source_sha256": "fb91c0c261c688b77a02020b9100268f208ba5d50cded688ab94f7d07516c1c3",
+          "content_sha256": "322c5922f7e246d524d1d86747c8fa8e21914b94f81b048e573d5fc48af64cc9",
+          "effective_date": "2026-01-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 2.0\nStatus: SUPERSEDED\nEffective date: 2026-01-01\nSuperseded date: 2026-08-31\nOLD-RP-1 Standard Return Window\nMost products may be returned within 45 calendar days of delivery.",
+          "superseded_date": "2026-08-31",
+          "rank": 4,
+          "cosine_distance": 0.3844595138889365,
+          "cosine_similarity": 0.6155404861110635,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Opened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-2 Opened Electronics",
+          "section": "RP-2",
+          "version": "3.0",
+          "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+          "line_end": 12,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-2 Opened Electronics"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-2 Opened Electronics\nOpened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "superseded_date": null,
+          "rank": 5,
+          "cosine_distance": 0.38924280148572854,
+          "cosine_similarity": 0.6107571985142715,
+          "untrusted_reference_material": true
+        }
+      ],
+      "answer": {
+        "status": "answered",
+        "explanation": "Premium membership does not extend the standard 30-day return window. [04_premium_customer_policy.md#PC-3]\n\nPremium customers do not pay the 15% restocking fee on opened electronics. [01_refund_policy_current.md#RP-3]\n\nVerified Premium customers have the opened-electronics restocking fee waived. [04_premium_customer_policy.md#PC-2]\n\nOpened electronics may be returned within 30 calendar days of delivery. A 15% restocking fee normally applies. [01_refund_policy_current.md#RP-2]",
+        "citations": [
+          {
+            "evidence_id": "E1",
+            "quote": "Premium membership does not extend the standard 30-day return window.",
+            "chunk_id": "c26d4e574d0dbace37667e982844839e8fd815c6bbe4d1d1d3607639e418c7ce",
+            "source": "04_premium_customer_policy.md",
+            "section": "PC-3",
+            "version": "2.1",
+            "status": "CURRENT",
+            "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+            "content_sha256": "436db54966c3b3214e9c9ffd50223a180f4faac2c0b77e04910d0c04ec86b80e",
+            "line_start": 12,
+            "line_end": 13
+          },
+          {
+            "evidence_id": "E2",
+            "quote": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+            "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-3",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+            "line_start": 13,
+            "line_end": 15
+          },
+          {
+            "evidence_id": "E3",
+            "quote": "Verified Premium customers have the opened-electronics restocking fee waived.",
+            "chunk_id": "8091d60b69c0d314c80d38ccca52b7cf07bbe595de2594e1ceb1cd3ce59d2b51",
+            "source": "04_premium_customer_policy.md",
+            "section": "PC-2",
+            "version": "2.1",
+            "status": "CURRENT",
+            "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+            "content_sha256": "86215419266c8d63f598194dbbcaa8f09732a66eaf303d3bb704042de7789613",
+            "line_start": 9,
+            "line_end": 11
+          },
+          {
+            "evidence_id": "E5",
+            "quote": "Opened electronics may be returned within 30 calendar days of delivery. A 15% restocking fee normally applies.",
+            "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-2",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+            "line_start": 9,
+            "line_end": 12
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true,
+        "generation": {
+          "raw": "{\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"Premium membership does not extend the standard 30-day return window.\"},{\"evidence_id\":\"E2\",\"quote\":\"Premium customers do not pay the 15% restocking fee on opened electronics.\"},{\"evidence_id\":\"E3\",\"quote\":\"Verified Premium customers have the opened-electronics restocking fee waived.\"},{\"evidence_id\":\"E5\",\"quote\":\"Opened electronics may be returned within 30 calendar days of delivery.\\nA 15% restocking fee normally applies.\"}],\"status\":\"answer\"}",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 490,
+            "completion_tokens": 119,
+            "total_tokens": 609
+          }
+        }
+      }
+    },
+    {
+      "id": "Q09",
+      "category": "standard",
+      "question": "Does a manufacturer warranty automatically make an order refundable?",
+      "expected_behavior": "answer",
+      "expected_labels": [
+        [
+          "03_warranty_policy.md",
+          "WP-2"
+        ],
+        [
+          "03_warranty_policy.md",
+          "WP-3"
+        ]
+      ],
+      "expected_answer": "No.",
+      "retrieved": [
+        {
+          "text": "Opened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-2 Opened Electronics",
+          "section": "RP-2",
+          "version": "3.0",
+          "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+          "line_end": 12,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-2 Opened Electronics"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-2 Opened Electronics\nOpened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "superseded_date": null,
+          "rank": 1,
+          "cosine_distance": 0.2954922243828326,
+          "cosine_similarity": 0.7045077756171674,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "A product reported damaged on arrival within 7 calendar days of delivery may be refunded or replaced even when the item would otherwise be non-refundable.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-6 Damaged-on-Arrival Exception",
+          "section": "RP-6",
+          "version": "3.0",
+          "chunk_id": "630004804375862b2d12a884376b250fb5b69a7ffde75096e55ec0a5a72e6656",
+          "line_end": 24,
+          "line_start": 22,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-6 Damaged-on-Arrival Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "f4b6f456fccce185089841ffab662805e0765fd51656746e0ed4b947de5aaf32",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-6 Damaged-on-Arrival Exception\nA product reported damaged on arrival within 7 calendar days of delivery may be refunded or replaced even when the item would otherwise be non-refundable.",
+          "superseded_date": null,
+          "rank": 2,
+          "cosine_distance": 0.2964708760203624,
+          "cosine_similarity": 0.7035291239796376,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "If an electronic product becomes defective after the 30-day return window, the customer may be directed to warranty service. This does not automatically create refund eligibility.",
+          "title": "SampleCo Retail — Warranty Policy",
+          "source": "03_warranty_policy.md",
+          "status": "CURRENT",
+          "heading": "WP-2 Defective After Return Window",
+          "section": "WP-2",
+          "version": "1.4",
+          "chunk_id": "7e48a427a8f7ffe55b222ede2a6494650f1a066aa02db12a48c4b03a09a81c91",
+          "line_end": 11,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Warranty Policy",
+            "WP-2 Defective After Return Window"
+          ],
+          "source_sha256": "db59e7f8c12114faefa2f2e2284b9d579e4fd1b154cd7bb9632d1f482bd1cde2",
+          "content_sha256": "ec5060d1e69c1e236a1189f7bb790e9e9cb752ff7ef9450e96d21439812fe27b",
+          "effective_date": "2026-06-15",
+          "embedding_text": "SampleCo Retail — Warranty Policy\nVersion: 1.4\nStatus: CURRENT\nEffective date: 2026-06-15\nWP-2 Defective After Return Window\nIf an electronic product becomes defective after the 30-day return window, the customer may be directed to warranty service. This does not automatically create refund eligibility.",
+          "superseded_date": null,
+          "rank": 3,
+          "cosine_distance": 0.29980269679890126,
+          "cosine_similarity": 0.7001973032010987,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-4 Final-Sale Items",
+          "section": "RP-4",
+          "version": "3.0",
+          "chunk_id": "bc8e11884f412c8ee3db919c0da4937d47f6838d957815dbcd56fca8bb8c06d3",
+          "line_end": 18,
+          "line_start": 16,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-4 Final-Sale Items"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "477c314229fbb974e765023d69dfab73fb6fc1e15a2861b06949790cceecb9fc",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-4 Final-Sale Items\nItems explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+          "superseded_date": null,
+          "rank": 4,
+          "cosine_distance": 0.3021624851546951,
+          "cosine_similarity": 0.6978375148453049,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-3 Premium Customer Exception",
+          "section": "RP-3",
+          "version": "3.0",
+          "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+          "line_end": 15,
+          "line_start": 13,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-3 Premium Customer Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-3 Premium Customer Exception\nPremium customers do not pay the 15% restocking fee on opened electronics.",
+          "superseded_date": null,
+          "rank": 5,
+          "cosine_distance": 0.30250921770645545,
+          "cosine_similarity": 0.6974907822935446,
+          "untrusted_reference_material": true
+        }
+      ],
+      "answer": {
+        "status": "answered",
+        "explanation": "If an electronic product becomes defective after the 30-day return window, the customer may be directed to warranty service. This does not automatically create refund eligibility. [03_warranty_policy.md#WP-2]",
+        "citations": [
+          {
+            "evidence_id": "E3",
+            "quote": "If an electronic product becomes defective after the 30-day return window, the customer may be directed to warranty service. This does not automatically create refund eligibility.",
+            "chunk_id": "7e48a427a8f7ffe55b222ede2a6494650f1a066aa02db12a48c4b03a09a81c91",
+            "source": "03_warranty_policy.md",
+            "section": "WP-2",
+            "version": "1.4",
+            "status": "CURRENT",
+            "source_sha256": "db59e7f8c12114faefa2f2e2284b9d579e4fd1b154cd7bb9632d1f482bd1cde2",
+            "content_sha256": "ec5060d1e69c1e236a1189f7bb790e9e9cb752ff7ef9450e96d21439812fe27b",
+            "line_start": 9,
+            "line_end": 11
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true,
+        "generation": {
+          "raw": "{\"citations\":[{\"evidence_id\":\"E3\",\"quote\":\"If an electronic product becomes defective after the 30-day return window, the customer may be directed to warranty service. This does not automatically create refund eligibility.\"}],\"status\":\"answer\"}",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 583,
+            "completion_tokens": 51,
+            "total_tokens": 634
+          }
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "category": "exact_clause",
+      "question": "What is the current opened-electronics restocking fee?",
+      "expected_behavior": "answer",
+      "expected_labels": [
+        [
+          "01_refund_policy_current.md",
+          "RP-2"
+        ]
+      ],
+      "expected_answer": "15%. Do not use the superseded 20% rule.",
+      "retrieved": [
+        {
+          "text": "Opened electronics are subject to a 20% restocking fee.\n\nIMPORTANT: This document is historical. It must not be used for refund decisions on requests governed by the current policy.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "02_refund_policy_superseded.md",
+          "status": "SUPERSEDED",
+          "heading": "OLD-RP-2 Opened Electronics",
+          "section": "OLD-RP-2",
+          "version": "2.0",
+          "chunk_id": "2239173a724c495bee8e6438d160a91a719fc634ef80d5422ddec12b214ec4cb",
+          "line_end": 13,
+          "line_start": 10,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "OLD-RP-2 Opened Electronics"
+          ],
+          "source_sha256": "fb91c0c261c688b77a02020b9100268f208ba5d50cded688ab94f7d07516c1c3",
+          "content_sha256": "923b2f49ae86c97a08ac46525f24e60c5aa27d71166852ec9d39653143f5efac",
+          "effective_date": "2026-01-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 2.0\nStatus: SUPERSEDED\nEffective date: 2026-01-01\nSuperseded date: 2026-08-31\nOLD-RP-2 Opened Electronics\nOpened electronics are subject to a 20% restocking fee.\n\nIMPORTANT: This document is historical. It must not be used for refund decisions on requests governed by the current policy.",
+          "superseded_date": "2026-08-31",
+          "rank": 1,
+          "cosine_distance": 0.16070825447014614,
+          "cosine_similarity": 0.8392917455298539,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Opened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-2 Opened Electronics",
+          "section": "RP-2",
+          "version": "3.0",
+          "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+          "line_end": 12,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-2 Opened Electronics"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-2 Opened Electronics\nOpened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "superseded_date": null,
+          "rank": 2,
+          "cosine_distance": 0.19216644880671196,
+          "cosine_similarity": 0.807833551193288,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-3 Premium Customer Exception",
+          "section": "RP-3",
+          "version": "3.0",
+          "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+          "line_end": 15,
+          "line_start": 13,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-3 Premium Customer Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-3 Premium Customer Exception\nPremium customers do not pay the 15% restocking fee on opened electronics.",
+          "superseded_date": null,
+          "rank": 3,
+          "cosine_distance": 0.2396797848129043,
+          "cosine_similarity": 0.7603202151870957,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Verified Premium customers have the opened-electronics restocking fee waived.",
+          "title": "SampleCo Retail — Premium Customer Policy",
+          "source": "04_premium_customer_policy.md",
+          "status": "CURRENT",
+          "heading": "PC-2 Restocking Benefit",
+          "section": "PC-2",
+          "version": "2.1",
+          "chunk_id": "8091d60b69c0d314c80d38ccca52b7cf07bbe595de2594e1ceb1cd3ce59d2b51",
+          "line_end": 11,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Premium Customer Policy",
+            "PC-2 Restocking Benefit"
+          ],
+          "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+          "content_sha256": "86215419266c8d63f598194dbbcaa8f09732a66eaf303d3bb704042de7789613",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Premium Customer Policy\nVersion: 2.1\nStatus: CURRENT\nEffective date: 2026-09-01\nPC-2 Restocking Benefit\nVerified Premium customers have the opened-electronics restocking fee waived.",
+          "superseded_date": null,
+          "rank": 4,
+          "cosine_distance": 0.24068491438479567,
+          "cosine_similarity": 0.7593150856152043,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-4 Final-Sale Items",
+          "section": "RP-4",
+          "version": "3.0",
+          "chunk_id": "bc8e11884f412c8ee3db919c0da4937d47f6838d957815dbcd56fca8bb8c06d3",
+          "line_end": 18,
+          "line_start": 16,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-4 Final-Sale Items"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "477c314229fbb974e765023d69dfab73fb6fc1e15a2861b06949790cceecb9fc",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-4 Final-Sale Items\nItems explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+          "superseded_date": null,
+          "rank": 5,
+          "cosine_distance": 0.33099448764520845,
+          "cosine_similarity": 0.6690055123547916,
+          "untrusted_reference_material": true
+        }
+      ],
+      "answer": {
+        "status": "answered",
+        "explanation": "Opened electronics may be returned within 30 calendar days of delivery. A 15% restocking fee normally applies. [01_refund_policy_current.md#RP-2]",
+        "citations": [
+          {
+            "evidence_id": "E2",
+            "quote": "Opened electronics may be returned within 30 calendar days of delivery. A 15% restocking fee normally applies.",
+            "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-2",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+            "line_start": 9,
+            "line_end": 12
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true,
+        "generation": {
+          "raw": "{\"citations\":[{\"evidence_id\":\"E2\",\"quote\":\"Opened electronics may be returned within 30 calendar days of delivery.\\nA 15% restocking fee normally applies.\"}],\"status\":\"answer\"}",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 495,
+            "completion_tokens": 45,
+            "total_tokens": 540
+          }
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "category": "superseded",
+      "question": "Should Refund Policy v2.0 be used for a request governed by the September 2026 policy?",
+      "expected_behavior": "answer",
+      "expected_labels": [
+        [
+          "02_refund_policy_superseded.md",
+          "document status"
+        ]
+      ],
+      "expected_answer": "No. It is superseded.",
+      "retrieved": [
+        {
+          "text": "Version: 2.0\nEffective date: 2026-01-01\nSuperseded date: 2026-08-31\nStatus: SUPERSEDED",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "02_refund_policy_superseded.md",
+          "status": "SUPERSEDED",
+          "heading": "SampleCo Retail — Refund Policy",
+          "section": "document status",
+          "version": "2.0",
+          "chunk_id": "c581a603f900baec91d2a7b27907dd5f66fe9731a357ff5b08f8547b5fd20b15",
+          "line_end": 6,
+          "line_start": 1,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy"
+          ],
+          "source_sha256": "fb91c0c261c688b77a02020b9100268f208ba5d50cded688ab94f7d07516c1c3",
+          "content_sha256": "3f9b3c39ad057c8666678fa6db40a43f47691994901767e4e57fdd2d11056e60",
+          "effective_date": "2026-01-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nDocument status\nVersion: 2.0\nEffective date: 2026-01-01\nSuperseded date: 2026-08-31\nStatus: SUPERSEDED",
+          "superseded_date": "2026-08-31",
+          "rank": 1,
+          "cosine_distance": 0.2309607129716107,
+          "cosine_similarity": 0.7690392870283893,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "If the current policy does not address a requested situation, the system must not invent a rule. The request must be escalated for human review.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-7 Missing Policy Coverage",
+          "section": "RP-7",
+          "version": "3.0",
+          "chunk_id": "c4ae22b5a7be2cc139e39d9c678033d65e30bb619ccc79da90235d1a602c6f12",
+          "line_end": 26,
+          "line_start": 25,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-7 Missing Policy Coverage"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "a66c3163d2f2d44dd482c90fa20164450c7487fe46d6dd44578e04da63a0cbca",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-7 Missing Policy Coverage\nIf the current policy does not address a requested situation, the system must not invent a rule. The request must be escalated for human review.",
+          "superseded_date": null,
+          "rank": 2,
+          "cosine_distance": 0.232530548127314,
+          "cosine_similarity": 0.767469451872686,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Version: 3.0\nEffective date: 2026-09-01\nStatus: CURRENT",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "SampleCo Retail — Refund Policy",
+          "section": "document status",
+          "version": "3.0",
+          "chunk_id": "7ba51d5123d01ce3e261cc87f478be1596efa3ae6024a7cfe8d78f25c9b09290",
+          "line_end": 5,
+          "line_start": 1,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "f34084e5e0674f61c7f27981cf85c814eda51084bf640324f7dd32b636c716e0",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nDocument status\nVersion: 3.0\nEffective date: 2026-09-01\nStatus: CURRENT",
+          "superseded_date": null,
+          "rank": 3,
+          "cosine_distance": 0.23997790812787523,
+          "cosine_similarity": 0.7600220918721248,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Opened electronics are subject to a 20% restocking fee.\n\nIMPORTANT: This document is historical. It must not be used for refund decisions on requests governed by the current policy.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "02_refund_policy_superseded.md",
+          "status": "SUPERSEDED",
+          "heading": "OLD-RP-2 Opened Electronics",
+          "section": "OLD-RP-2",
+          "version": "2.0",
+          "chunk_id": "2239173a724c495bee8e6438d160a91a719fc634ef80d5422ddec12b214ec4cb",
+          "line_end": 13,
+          "line_start": 10,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "OLD-RP-2 Opened Electronics"
+          ],
+          "source_sha256": "fb91c0c261c688b77a02020b9100268f208ba5d50cded688ab94f7d07516c1c3",
+          "content_sha256": "923b2f49ae86c97a08ac46525f24e60c5aa27d71166852ec9d39653143f5efac",
+          "effective_date": "2026-01-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 2.0\nStatus: SUPERSEDED\nEffective date: 2026-01-01\nSuperseded date: 2026-08-31\nOLD-RP-2 Opened Electronics\nOpened electronics are subject to a 20% restocking fee.\n\nIMPORTANT: This document is historical. It must not be used for refund decisions on requests governed by the current policy.",
+          "superseded_date": "2026-08-31",
+          "rank": 4,
+          "cosine_distance": 0.25278379826207686,
+          "cosine_similarity": 0.7472162017379231,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Approved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-5 Refund Method",
+          "section": "RP-5",
+          "version": "3.0",
+          "chunk_id": "bd9850073744f7e69fa169f27619aa94063f41082c18a57e6b22d9bb8aba9cb9",
+          "line_end": 21,
+          "line_start": 19,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-5 Refund Method"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "d30f228bc780b0be16688189b06dceaa7fea6a20d5067bc289f5e44520db9ebc",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-5 Refund Method\nApproved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.",
+          "superseded_date": null,
+          "rank": 5,
+          "cosine_distance": 0.259937734596454,
+          "cosine_similarity": 0.740062265403546,
+          "untrusted_reference_material": true
+        }
+      ],
+      "answer": {
+        "status": "answered",
+        "explanation": "Version: 2.0 Effective date: 2026-01-01 Superseded date: 2026-08-31 Status: SUPERSEDED [02_refund_policy_superseded.md#document status]\n\nIf the current policy does not address a requested situation, the system must not invent a rule. The request must be escalated for human review. [01_refund_policy_current.md#RP-7]\n\nVersion: 3.0 Effective date: 2026-09-01 Status: CURRENT [01_refund_policy_current.md#document status]\n\nApproved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item. [01_refund_policy_current.md#RP-5]",
+        "citations": [
+          {
+            "evidence_id": "E1",
+            "quote": "Version: 2.0 Effective date: 2026-01-01 Superseded date: 2026-08-31 Status: SUPERSEDED",
+            "chunk_id": "c581a603f900baec91d2a7b27907dd5f66fe9731a357ff5b08f8547b5fd20b15",
+            "source": "02_refund_policy_superseded.md",
+            "section": "document status",
+            "version": "2.0",
+            "status": "SUPERSEDED",
+            "source_sha256": "fb91c0c261c688b77a02020b9100268f208ba5d50cded688ab94f7d07516c1c3",
+            "content_sha256": "3f9b3c39ad057c8666678fa6db40a43f47691994901767e4e57fdd2d11056e60",
+            "line_start": 1,
+            "line_end": 6
+          },
+          {
+            "evidence_id": "E2",
+            "quote": "If the current policy does not address a requested situation, the system must not invent a rule. The request must be escalated for human review.",
+            "chunk_id": "c4ae22b5a7be2cc139e39d9c678033d65e30bb619ccc79da90235d1a602c6f12",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-7",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "a66c3163d2f2d44dd482c90fa20164450c7487fe46d6dd44578e04da63a0cbca",
+            "line_start": 25,
+            "line_end": 26
+          },
+          {
+            "evidence_id": "E3",
+            "quote": "Version: 3.0 Effective date: 2026-09-01 Status: CURRENT",
+            "chunk_id": "7ba51d5123d01ce3e261cc87f478be1596efa3ae6024a7cfe8d78f25c9b09290",
+            "source": "01_refund_policy_current.md",
+            "section": "document status",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "f34084e5e0674f61c7f27981cf85c814eda51084bf640324f7dd32b636c716e0",
+            "line_start": 1,
+            "line_end": 5
+          },
+          {
+            "evidence_id": "E5",
+            "quote": "Approved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.",
+            "chunk_id": "bd9850073744f7e69fa169f27619aa94063f41082c18a57e6b22d9bb8aba9cb9",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-5",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "d30f228bc780b0be16688189b06dceaa7fea6a20d5067bc289f5e44520db9ebc",
+            "line_start": 19,
+            "line_end": 21
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true,
+        "generation": {
+          "raw": "{\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"Version: 2.0\\nEffective date: 2026-01-01\\nSuperseded date: 2026-08-31\\nStatus: SUPERSEDED\"},{\"evidence_id\":\"E2\",\"quote\":\"If the current policy does not address a requested situation, the system must not invent a rule. The request must be escalated for human review.\"},{\"evidence_id\":\"E3\",\"quote\":\"Version: 3.0\\nEffective date: 2026-09-01\\nStatus: CURRENT\"},{\"evidence_id\":\"E5\",\"quote\":\"Approved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.\"}],\"status\":\"answer\"}",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 558,
+            "completion_tokens": 169,
+            "total_tokens": 727
+          }
+        }
+      }
+    },
+    {
+      "id": "Q19",
+      "category": "exact_clause",
+      "question": "Can the model infer that someone is Premium because they say they are?",
+      "expected_behavior": "answer",
+      "expected_labels": [
+        [
+          "04_premium_customer_policy.md",
+          "PC-1"
+        ]
+      ],
+      "expected_answer": "No. Premium status must come from the customer record.",
+      "retrieved": [
+        {
+          "text": "Premium status must be verified from the customer record. The language model must not infer premium status from the customer's wording.",
+          "title": "SampleCo Retail — Premium Customer Policy",
+          "source": "04_premium_customer_policy.md",
+          "status": "CURRENT",
+          "heading": "PC-1 Premium Status",
+          "section": "PC-1",
+          "version": "2.1",
+          "chunk_id": "07f1046da1f77b6fc4d801c1f1b710c31c2cfb9756f15492d514db3c6f47c53e",
+          "line_end": 8,
+          "line_start": 6,
+          "heading_path": [
+            "SampleCo Retail — Premium Customer Policy",
+            "PC-1 Premium Status"
+          ],
+          "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+          "content_sha256": "919f67d0bf2ef3d71d59249fe437c980c002faf8feea9cca5439506880aed4ba",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Premium Customer Policy\nVersion: 2.1\nStatus: CURRENT\nEffective date: 2026-09-01\nPC-1 Premium Status\nPremium status must be verified from the customer record. The language model must not infer premium status from the customer's wording.",
+          "superseded_date": null,
+          "rank": 1,
+          "cosine_distance": 0.3414116494585352,
+          "cosine_similarity": 0.6585883505414648,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Premium membership does not extend the standard 30-day return window.",
+          "title": "SampleCo Retail — Premium Customer Policy",
+          "source": "04_premium_customer_policy.md",
+          "status": "CURRENT",
+          "heading": "PC-3 No Extended Window",
+          "section": "PC-3",
+          "version": "2.1",
+          "chunk_id": "c26d4e574d0dbace37667e982844839e8fd815c6bbe4d1d1d3607639e418c7ce",
+          "line_end": 13,
+          "line_start": 12,
+          "heading_path": [
+            "SampleCo Retail — Premium Customer Policy",
+            "PC-3 No Extended Window"
+          ],
+          "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+          "content_sha256": "436db54966c3b3214e9c9ffd50223a180f4faac2c0b77e04910d0c04ec86b80e",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Premium Customer Policy\nVersion: 2.1\nStatus: CURRENT\nEffective date: 2026-09-01\nPC-3 No Extended Window\nPremium membership does not extend the standard 30-day return window.",
+          "superseded_date": null,
+          "rank": 2,
+          "cosine_distance": 0.36684063271506984,
+          "cosine_similarity": 0.6331593672849302,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Verified Premium customers have the opened-electronics restocking fee waived.",
+          "title": "SampleCo Retail — Premium Customer Policy",
+          "source": "04_premium_customer_policy.md",
+          "status": "CURRENT",
+          "heading": "PC-2 Restocking Benefit",
+          "section": "PC-2",
+          "version": "2.1",
+          "chunk_id": "8091d60b69c0d314c80d38ccca52b7cf07bbe595de2594e1ceb1cd3ce59d2b51",
+          "line_end": 11,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Premium Customer Policy",
+            "PC-2 Restocking Benefit"
+          ],
+          "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+          "content_sha256": "86215419266c8d63f598194dbbcaa8f09732a66eaf303d3bb704042de7789613",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Premium Customer Policy\nVersion: 2.1\nStatus: CURRENT\nEffective date: 2026-09-01\nPC-2 Restocking Benefit\nVerified Premium customers have the opened-electronics restocking fee waived.",
+          "superseded_date": null,
+          "rank": 3,
+          "cosine_distance": 0.38019493098379387,
+          "cosine_similarity": 0.6198050690162061,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Version: 2.1\nEffective date: 2026-09-01\nStatus: CURRENT",
+          "title": "SampleCo Retail — Premium Customer Policy",
+          "source": "04_premium_customer_policy.md",
+          "status": "CURRENT",
+          "heading": "SampleCo Retail — Premium Customer Policy",
+          "section": "document status",
+          "version": "2.1",
+          "chunk_id": "d9f43ef6825ceb94ae93d187eb3601cf2b9c7235a4ed8d6f7b39d062708a27d1",
+          "line_end": 5,
+          "line_start": 1,
+          "heading_path": [
+            "SampleCo Retail — Premium Customer Policy"
+          ],
+          "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+          "content_sha256": "564cd99cd567a55c0f2256750eb80a2389e5c93bd6eec0a93c56b99519a46dc3",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Premium Customer Policy\nDocument status\nVersion: 2.1\nEffective date: 2026-09-01\nStatus: CURRENT",
+          "superseded_date": null,
+          "rank": 4,
+          "cosine_distance": 0.3905111318521747,
+          "cosine_similarity": 0.6094888681478253,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-3 Premium Customer Exception",
+          "section": "RP-3",
+          "version": "3.0",
+          "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+          "line_end": 15,
+          "line_start": 13,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-3 Premium Customer Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-3 Premium Customer Exception\nPremium customers do not pay the 15% restocking fee on opened electronics.",
+          "superseded_date": null,
+          "rank": 5,
+          "cosine_distance": 0.42605767094742664,
+          "cosine_similarity": 0.5739423290525734,
+          "untrusted_reference_material": true
+        }
+      ],
+      "answer": {
+        "status": "answered",
+        "explanation": "Premium status must be verified from the customer record. [04_premium_customer_policy.md#PC-1]\n\nPremium membership does not extend the standard 30-day return window. [04_premium_customer_policy.md#PC-3]\n\nVerified Premium customers have the opened-electronics restocking fee waived. [04_premium_customer_policy.md#PC-2]\n\nVersion: 2.1 Effective date: 2026-09-01 Status: CURRENT [04_premium_customer_policy.md#document status]",
+        "citations": [
+          {
+            "evidence_id": "E1",
+            "quote": "Premium status must be verified from the customer record.",
+            "chunk_id": "07f1046da1f77b6fc4d801c1f1b710c31c2cfb9756f15492d514db3c6f47c53e",
+            "source": "04_premium_customer_policy.md",
+            "section": "PC-1",
+            "version": "2.1",
+            "status": "CURRENT",
+            "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+            "content_sha256": "919f67d0bf2ef3d71d59249fe437c980c002faf8feea9cca5439506880aed4ba",
+            "line_start": 6,
+            "line_end": 8
+          },
+          {
+            "evidence_id": "E2",
+            "quote": "Premium membership does not extend the standard 30-day return window.",
+            "chunk_id": "c26d4e574d0dbace37667e982844839e8fd815c6bbe4d1d1d3607639e418c7ce",
+            "source": "04_premium_customer_policy.md",
+            "section": "PC-3",
+            "version": "2.1",
+            "status": "CURRENT",
+            "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+            "content_sha256": "436db54966c3b3214e9c9ffd50223a180f4faac2c0b77e04910d0c04ec86b80e",
+            "line_start": 12,
+            "line_end": 13
+          },
+          {
+            "evidence_id": "E3",
+            "quote": "Verified Premium customers have the opened-electronics restocking fee waived.",
+            "chunk_id": "8091d60b69c0d314c80d38ccca52b7cf07bbe595de2594e1ceb1cd3ce59d2b51",
+            "source": "04_premium_customer_policy.md",
+            "section": "PC-2",
+            "version": "2.1",
+            "status": "CURRENT",
+            "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+            "content_sha256": "86215419266c8d63f598194dbbcaa8f09732a66eaf303d3bb704042de7789613",
+            "line_start": 9,
+            "line_end": 11
+          },
+          {
+            "evidence_id": "E4",
+            "quote": "Version: 2.1 Effective date: 2026-09-01 Status: CURRENT",
+            "chunk_id": "d9f43ef6825ceb94ae93d187eb3601cf2b9c7235a4ed8d6f7b39d062708a27d1",
+            "source": "04_premium_customer_policy.md",
+            "section": "document status",
+            "version": "2.1",
+            "status": "CURRENT",
+            "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+            "content_sha256": "564cd99cd567a55c0f2256750eb80a2389e5c93bd6eec0a93c56b99519a46dc3",
+            "line_start": 1,
+            "line_end": 5
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true,
+        "generation": {
+          "raw": "{\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"Premium status must be verified from the customer record.\"},{\"evidence_id\":\"E2\",\"quote\":\"Premium membership does not extend the standard 30-day return window.\"},{\"evidence_id\":\"E3\",\"quote\":\"Verified Premium customers have the opened-electronics restocking fee waived.\"},{\"evidence_id\":\"E4\",\"quote\":\"Version: 2.1\\nEffective date: 2026-09-01\\nStatus: CURRENT\"}],\"status\":\"answer\"}",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 558,
+            "completion_tokens": 111,
+            "total_tokens": 669
+          }
+        }
+      }
+    },
+    {
+      "id": "Q20",
+      "category": "exact_clause",
+      "question": "Which system component determines refund amounts?",
+      "expected_behavior": "answer",
+      "expected_labels": [
+        [
+          "06_ai_safety_policy.md",
+          "AS-3"
+        ]
+      ],
+      "expected_answer": "Application code / deterministic rules, not the LLM.",
+      "retrieved": [
+        {
+          "text": "Every refund execution must include a unique idempotency key. Reusing the same approval must not create a second refund.",
+          "title": "SampleCo Retail — Refund Approval & Execution Policy",
+          "source": "05_approval_and_execution_policy.md",
+          "status": "CURRENT",
+          "heading": "AE-5 Idempotency",
+          "section": "AE-5",
+          "version": "1.0",
+          "chunk_id": "79a2e5c34657ba7a11506bec4e2b6f383a3488c17c3570f272942516053362ff",
+          "line_end": 20,
+          "line_start": 18,
+          "heading_path": [
+            "SampleCo Retail — Refund Approval & Execution Policy",
+            "AE-5 Idempotency"
+          ],
+          "source_sha256": "ce52882da4d6631955117204f1db72c26b09019ea8f60db6bb44a8da398b56c8",
+          "content_sha256": "274a6f7fb5ef961f206e21ed63c469e56f19d8e36ca33825a783cfcf04cabfba",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Approval & Execution Policy\nVersion: 1.0\nStatus: CURRENT\nEffective date: 2026-09-01\nAE-5 Idempotency\nEvery refund execution must include a unique idempotency key. Reusing the same approval must not create a second refund.",
+          "superseded_date": null,
+          "rank": 1,
+          "cosine_distance": 0.3208566274556337,
+          "cosine_similarity": 0.6791433725443663,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-4 Final-Sale Items",
+          "section": "RP-4",
+          "version": "3.0",
+          "chunk_id": "bc8e11884f412c8ee3db919c0da4937d47f6838d957815dbcd56fca8bb8c06d3",
+          "line_end": 18,
+          "line_start": 16,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-4 Final-Sale Items"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "477c314229fbb974e765023d69dfab73fb6fc1e15a2861b06949790cceecb9fc",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-4 Final-Sale Items\nItems explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+          "superseded_date": null,
+          "rank": 2,
+          "cosine_distance": 0.3241045466754562,
+          "cosine_similarity": 0.6758954533245438,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "The approval screen must show the exact order ID, customer ID, refund amount, payment method, and action to be executed.",
+          "title": "SampleCo Retail — Refund Approval & Execution Policy",
+          "source": "05_approval_and_execution_policy.md",
+          "status": "CURRENT",
+          "heading": "AE-2 Exact Payload",
+          "section": "AE-2",
+          "version": "1.0",
+          "chunk_id": "fb96fd302a996247fcfc7524f810181e1826bd663ed52ffd97956b37e75296c0",
+          "line_end": 11,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Refund Approval & Execution Policy",
+            "AE-2 Exact Payload"
+          ],
+          "source_sha256": "ce52882da4d6631955117204f1db72c26b09019ea8f60db6bb44a8da398b56c8",
+          "content_sha256": "fde4a634a86017d23ff1ad96f84c19f0baad37c1890100dbf61141feee2b688b",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Approval & Execution Policy\nVersion: 1.0\nStatus: CURRENT\nEffective date: 2026-09-01\nAE-2 Exact Payload\nThe approval screen must show the exact order ID, customer ID, refund amount, payment method, and action to be executed.",
+          "superseded_date": null,
+          "rank": 3,
+          "cosine_distance": 0.3248830027703702,
+          "cosine_similarity": 0.6751169972296298,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Approved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-5 Refund Method",
+          "section": "RP-5",
+          "version": "3.0",
+          "chunk_id": "bd9850073744f7e69fa169f27619aa94063f41082c18a57e6b22d9bb8aba9cb9",
+          "line_end": 21,
+          "line_start": 19,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-5 Refund Method"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "d30f228bc780b0be16688189b06dceaa7fea6a20d5067bc289f5e44520db9ebc",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-5 Refund Method\nApproved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.",
+          "superseded_date": null,
+          "rank": 4,
+          "cosine_distance": 0.32556680676243166,
+          "cosine_similarity": 0.6744331932375683,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Opened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-2 Opened Electronics",
+          "section": "RP-2",
+          "version": "3.0",
+          "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+          "line_end": 12,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-2 Opened Electronics"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-2 Opened Electronics\nOpened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "superseded_date": null,
+          "rank": 5,
+          "cosine_distance": 0.3279154085860826,
+          "cosine_similarity": 0.6720845914139174,
+          "untrusted_reference_material": true
+        }
+      ],
+      "answer": {
+        "status": "answered",
+        "explanation": "The approval screen must show the exact order ID, customer ID, refund amount, payment method, and action to be executed. [05_approval_and_execution_policy.md#AE-2]",
+        "citations": [
+          {
+            "evidence_id": "E3",
+            "quote": "The approval screen must show the exact order ID, customer ID, refund amount, payment method, and action to be executed.",
+            "chunk_id": "fb96fd302a996247fcfc7524f810181e1826bd663ed52ffd97956b37e75296c0",
+            "source": "05_approval_and_execution_policy.md",
+            "section": "AE-2",
+            "version": "1.0",
+            "status": "CURRENT",
+            "source_sha256": "ce52882da4d6631955117204f1db72c26b09019ea8f60db6bb44a8da398b56c8",
+            "content_sha256": "fde4a634a86017d23ff1ad96f84c19f0baad37c1890100dbf61141feee2b688b",
+            "line_start": 9,
+            "line_end": 11
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true,
+        "generation": {
+          "raw": "{\"citations\":[{\"evidence_id\":\"E3\",\"quote\":\"The approval screen must show the exact order ID, customer ID, refund amount, payment method, and action to be executed.\"}],\"status\":\"answer\"}",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 574,
+            "completion_tokens": 44,
+            "total_tokens": 618
+          }
+        }
+      }
+    },
+    {
+      "id": "Q24",
+      "category": "security",
+      "question": "May the LLM generate raw SQL to issue a refund?",
+      "expected_behavior": "answer",
+      "expected_labels": [
+        [
+          "06_ai_safety_policy.md",
+          "AS-2"
+        ],
+        [
+          "06_ai_safety_policy.md",
+          "AS-3"
+        ]
+      ],
+      "expected_answer": "No. It may only propose allowlisted actions; execution stays in deterministic application code.",
+      "retrieved": [
+        {
+          "text": "Every refund execution must include a unique idempotency key. Reusing the same approval must not create a second refund.",
+          "title": "SampleCo Retail — Refund Approval & Execution Policy",
+          "source": "05_approval_and_execution_policy.md",
+          "status": "CURRENT",
+          "heading": "AE-5 Idempotency",
+          "section": "AE-5",
+          "version": "1.0",
+          "chunk_id": "79a2e5c34657ba7a11506bec4e2b6f383a3488c17c3570f272942516053362ff",
+          "line_end": 20,
+          "line_start": 18,
+          "heading_path": [
+            "SampleCo Retail — Refund Approval & Execution Policy",
+            "AE-5 Idempotency"
+          ],
+          "source_sha256": "ce52882da4d6631955117204f1db72c26b09019ea8f60db6bb44a8da398b56c8",
+          "content_sha256": "274a6f7fb5ef961f206e21ed63c469e56f19d8e36ca33825a783cfcf04cabfba",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Approval & Execution Policy\nVersion: 1.0\nStatus: CURRENT\nEffective date: 2026-09-01\nAE-5 Idempotency\nEvery refund execution must include a unique idempotency key. Reusing the same approval must not create a second refund.",
+          "superseded_date": null,
+          "rank": 1,
+          "cosine_distance": 0.36289797050367945,
+          "cosine_similarity": 0.6371020294963206,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "A product reported damaged on arrival within 7 calendar days of delivery may be refunded or replaced even when the item would otherwise be non-refundable.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-6 Damaged-on-Arrival Exception",
+          "section": "RP-6",
+          "version": "3.0",
+          "chunk_id": "630004804375862b2d12a884376b250fb5b69a7ffde75096e55ec0a5a72e6656",
+          "line_end": 24,
+          "line_start": 22,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-6 Damaged-on-Arrival Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "f4b6f456fccce185089841ffab662805e0765fd51656746e0ed4b947de5aaf32",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-6 Damaged-on-Arrival Exception\nA product reported damaged on arrival within 7 calendar days of delivery may be refunded or replaced even when the item would otherwise be non-refundable.",
+          "superseded_date": null,
+          "rank": 2,
+          "cosine_distance": 0.38319308958135534,
+          "cosine_similarity": 0.6168069104186447,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-4 Final-Sale Items",
+          "section": "RP-4",
+          "version": "3.0",
+          "chunk_id": "bc8e11884f412c8ee3db919c0da4937d47f6838d957815dbcd56fca8bb8c06d3",
+          "line_end": 18,
+          "line_start": 16,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-4 Final-Sale Items"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "477c314229fbb974e765023d69dfab73fb6fc1e15a2861b06949790cceecb9fc",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-4 Final-Sale Items\nItems explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+          "superseded_date": null,
+          "rank": 3,
+          "cosine_distance": 0.3869810373828322,
+          "cosine_similarity": 0.6130189626171678,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Refund eligibility, fee calculations, dates, monetary amounts, and hard limits are computed by application code, not by the language model.",
+          "title": "SampleCo Retail — AI Safety Policy",
+          "source": "06_ai_safety_policy.md",
+          "status": "CURRENT",
+          "heading": "AS-3 Deterministic Decision Source",
+          "section": "AS-3",
+          "version": "1.0",
+          "chunk_id": "1b2acedfb1585ee7daadcd24c1a9584413f3bc51823bc449133209cd19c10858",
+          "line_end": 14,
+          "line_start": 12,
+          "heading_path": [
+            "SampleCo Retail — AI Safety Policy",
+            "AS-3 Deterministic Decision Source"
+          ],
+          "source_sha256": "8db66c9120ff6939a3a370839e154e3c48d8bf90af8a314981f0cc73f3d4863f",
+          "content_sha256": "c4bf5b89672d19f79b0ca00a1172c0b9d7b324a292730670d9344b66f7980259",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — AI Safety Policy\nVersion: 1.0\nStatus: CURRENT\nEffective date: 2026-09-01\nAS-3 Deterministic Decision Source\nRefund eligibility, fee calculations, dates, monetary amounts, and hard limits are computed by application code, not by the language model.",
+          "superseded_date": null,
+          "rank": 4,
+          "cosine_distance": 0.38704913280049835,
+          "cosine_similarity": 0.6129508671995016,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-3 Premium Customer Exception",
+          "section": "RP-3",
+          "version": "3.0",
+          "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+          "line_end": 15,
+          "line_start": 13,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-3 Premium Customer Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-3 Premium Customer Exception\nPremium customers do not pay the 15% restocking fee on opened electronics.",
+          "superseded_date": null,
+          "rank": 5,
+          "cosine_distance": 0.3900001049041575,
+          "cosine_similarity": 0.6099998950958425,
+          "untrusted_reference_material": true
+        }
+      ],
+      "answer": {
+        "status": "answered",
+        "explanation": "Every refund execution must include a unique idempotency key. Reusing the same approval must not create a second refund. [05_approval_and_execution_policy.md#AE-5]",
+        "citations": [
+          {
+            "evidence_id": "E1",
+            "quote": "Every refund execution must include a unique idempotency key. Reusing the same approval must not create a second refund.",
+            "chunk_id": "79a2e5c34657ba7a11506bec4e2b6f383a3488c17c3570f272942516053362ff",
+            "source": "05_approval_and_execution_policy.md",
+            "section": "AE-5",
+            "version": "1.0",
+            "status": "CURRENT",
+            "source_sha256": "ce52882da4d6631955117204f1db72c26b09019ea8f60db6bb44a8da398b56c8",
+            "content_sha256": "274a6f7fb5ef961f206e21ed63c469e56f19d8e36ca33825a783cfcf04cabfba",
+            "line_start": 18,
+            "line_end": 20
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true,
+        "generation": {
+          "raw": "{\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"Every refund execution must include a unique idempotency key. Reusing the same approval must not create a second refund.\"}],\"status\":\"answer\"}",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 579,
+            "completion_tokens": 44,
+            "total_tokens": 623
+          }
+        }
+      }
+    },
+    {
+      "id": "Q27",
+      "category": "unanswerable",
+      "question": "Does SampleCo reimburse customs duties on returns?",
+      "expected_behavior": "abstain",
+      "expected_labels": [
+        [
+          "01_refund_policy_current.md",
+          "RP-7"
+        ]
+      ],
+      "expected_answer": "Not specified; escalate for human review.",
+      "retrieved": [
+        {
+          "text": "A product reported damaged on arrival within 7 calendar days of delivery may be refunded or replaced even when the item would otherwise be non-refundable.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-6 Damaged-on-Arrival Exception",
+          "section": "RP-6",
+          "version": "3.0",
+          "chunk_id": "630004804375862b2d12a884376b250fb5b69a7ffde75096e55ec0a5a72e6656",
+          "line_end": 24,
+          "line_start": 22,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-6 Damaged-on-Arrival Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "f4b6f456fccce185089841ffab662805e0765fd51656746e0ed4b947de5aaf32",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-6 Damaged-on-Arrival Exception\nA product reported damaged on arrival within 7 calendar days of delivery may be refunded or replaced even when the item would otherwise be non-refundable.",
+          "superseded_date": null,
+          "rank": 1,
+          "cosine_distance": 0.24207241974964966,
+          "cosine_similarity": 0.7579275802503503,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Most products may be returned within 30 calendar days of delivery.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-1 Standard Return Window",
+          "section": "RP-1",
+          "version": "3.0",
+          "chunk_id": "d517e534958e444f47d0d740a00f6d0d470d79e64619441adc20b72f29ce9b58",
+          "line_end": 8,
+          "line_start": 6,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-1 Standard Return Window"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "b8a703db9c7d58e1c48fc770f669986838e1ee7d1b9e86aa76dba6d3cd2c7aad",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-1 Standard Return Window\nMost products may be returned within 30 calendar days of delivery.",
+          "superseded_date": null,
+          "rank": 2,
+          "cosine_distance": 0.24522270347664876,
+          "cosine_similarity": 0.7547772965233512,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Approved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-5 Refund Method",
+          "section": "RP-5",
+          "version": "3.0",
+          "chunk_id": "bd9850073744f7e69fa169f27619aa94063f41082c18a57e6b22d9bb8aba9cb9",
+          "line_end": 21,
+          "line_start": 19,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-5 Refund Method"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "d30f228bc780b0be16688189b06dceaa7fea6a20d5067bc289f5e44520db9ebc",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-5 Refund Method\nApproved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.",
+          "superseded_date": null,
+          "rank": 3,
+          "cosine_distance": 0.24841208784362878,
+          "cosine_similarity": 0.7515879121563712,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Opened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-2 Opened Electronics",
+          "section": "RP-2",
+          "version": "3.0",
+          "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+          "line_end": 12,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-2 Opened Electronics"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-2 Opened Electronics\nOpened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "superseded_date": null,
+          "rank": 4,
+          "cosine_distance": 0.250018842516618,
+          "cosine_similarity": 0.749981157483382,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-3 Premium Customer Exception",
+          "section": "RP-3",
+          "version": "3.0",
+          "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+          "line_end": 15,
+          "line_start": 13,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-3 Premium Customer Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-3 Premium Customer Exception\nPremium customers do not pay the 15% restocking fee on opened electronics.",
+          "superseded_date": null,
+          "rank": 5,
+          "cosine_distance": 0.25060944255530826,
+          "cosine_similarity": 0.7493905574446917,
+          "untrusted_reference_material": true
+        }
+      ],
+      "answer": {
+        "status": "answered",
+        "explanation": "A product reported damaged on arrival within 7 calendar days of delivery may be refunded or replaced even when the item would otherwise be non-refundable. [01_refund_policy_current.md#RP-6]",
+        "citations": [
+          {
+            "evidence_id": "E1",
+            "quote": "A product reported damaged on arrival within 7 calendar days of delivery may be refunded or replaced even when the item would otherwise be non-refundable.",
+            "chunk_id": "630004804375862b2d12a884376b250fb5b69a7ffde75096e55ec0a5a72e6656",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-6",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "f4b6f456fccce185089841ffab662805e0765fd51656746e0ed4b947de5aaf32",
+            "line_start": 22,
+            "line_end": 24
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true,
+        "generation": {
+          "raw": "{\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"A product reported damaged on arrival within 7 calendar days of delivery may be refunded or replaced even when the item would otherwise be non-refundable.\"}],\"status\":\"answer\"}",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 571,
+            "completion_tokens": 49,
+            "total_tokens": 620
+          }
+        }
+      }
+    },
+    {
+      "id": "Q29",
+      "category": "unanswerable",
+      "question": "Can a customer receive store credit instead of the original payment method?",
+      "expected_behavior": "abstain",
+      "expected_labels": [
+        [
+          "01_refund_policy_current.md",
+          "RP-5"
+        ],
+        [
+          "01_refund_policy_current.md",
+          "RP-7"
+        ]
+      ],
+      "expected_answer": "The policy specifies original payment method and does not define a store-credit option; do not invent one.",
+      "retrieved": [
+        {
+          "text": "Approved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-5 Refund Method",
+          "section": "RP-5",
+          "version": "3.0",
+          "chunk_id": "bd9850073744f7e69fa169f27619aa94063f41082c18a57e6b22d9bb8aba9cb9",
+          "line_end": 21,
+          "line_start": 19,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-5 Refund Method"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "d30f228bc780b0be16688189b06dceaa7fea6a20d5067bc289f5e44520db9ebc",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-5 Refund Method\nApproved refunds return to the original payment method. The refund amount must never exceed the amount actually paid for the item.",
+          "superseded_date": null,
+          "rank": 1,
+          "cosine_distance": 0.3510319397160986,
+          "cosine_similarity": 0.6489680602839014,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-3 Premium Customer Exception",
+          "section": "RP-3",
+          "version": "3.0",
+          "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+          "line_end": 15,
+          "line_start": 13,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-3 Premium Customer Exception"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-3 Premium Customer Exception\nPremium customers do not pay the 15% restocking fee on opened electronics.",
+          "superseded_date": null,
+          "rank": 2,
+          "cosine_distance": 0.36182477501403654,
+          "cosine_similarity": 0.6381752249859635,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Opened electronics are subject to a 20% restocking fee.\n\nIMPORTANT: This document is historical. It must not be used for refund decisions on requests governed by the current policy.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "02_refund_policy_superseded.md",
+          "status": "SUPERSEDED",
+          "heading": "OLD-RP-2 Opened Electronics",
+          "section": "OLD-RP-2",
+          "version": "2.0",
+          "chunk_id": "2239173a724c495bee8e6438d160a91a719fc634ef80d5422ddec12b214ec4cb",
+          "line_end": 13,
+          "line_start": 10,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "OLD-RP-2 Opened Electronics"
+          ],
+          "source_sha256": "fb91c0c261c688b77a02020b9100268f208ba5d50cded688ab94f7d07516c1c3",
+          "content_sha256": "923b2f49ae86c97a08ac46525f24e60c5aa27d71166852ec9d39653143f5efac",
+          "effective_date": "2026-01-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 2.0\nStatus: SUPERSEDED\nEffective date: 2026-01-01\nSuperseded date: 2026-08-31\nOLD-RP-2 Opened Electronics\nOpened electronics are subject to a 20% restocking fee.\n\nIMPORTANT: This document is historical. It must not be used for refund decisions on requests governed by the current policy.",
+          "superseded_date": "2026-08-31",
+          "rank": 3,
+          "cosine_distance": 0.3717302527106099,
+          "cosine_similarity": 0.6282697472893901,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Opened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-2 Opened Electronics",
+          "section": "RP-2",
+          "version": "3.0",
+          "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+          "line_end": 12,
+          "line_start": 9,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-2 Opened Electronics"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-2 Opened Electronics\nOpened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+          "superseded_date": null,
+          "rank": 4,
+          "cosine_distance": 0.372758432955554,
+          "cosine_similarity": 0.627241567044446,
+          "untrusted_reference_material": true
+        },
+        {
+          "text": "Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+          "title": "SampleCo Retail — Refund Policy",
+          "source": "01_refund_policy_current.md",
+          "status": "CURRENT",
+          "heading": "RP-4 Final-Sale Items",
+          "section": "RP-4",
+          "version": "3.0",
+          "chunk_id": "bc8e11884f412c8ee3db919c0da4937d47f6838d957815dbcd56fca8bb8c06d3",
+          "line_end": 18,
+          "line_start": 16,
+          "heading_path": [
+            "SampleCo Retail — Refund Policy",
+            "RP-4 Final-Sale Items"
+          ],
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+          "content_sha256": "477c314229fbb974e765023d69dfab73fb6fc1e15a2861b06949790cceecb9fc",
+          "effective_date": "2026-09-01",
+          "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-4 Final-Sale Items\nItems explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+          "superseded_date": null,
+          "rank": 5,
+          "cosine_distance": 0.37374305363805904,
+          "cosine_similarity": 0.626256946361941,
+          "untrusted_reference_material": true
+        }
+      ],
+      "answer": {
+        "status": "answered",
+        "explanation": "Approved refunds return to the original payment method. [01_refund_policy_current.md#RP-5]\n\nPremium customers do not pay the 15% restocking fee on opened electronics. [01_refund_policy_current.md#RP-3]\n\nOpened electronics may be returned within 30 calendar days of delivery. A 15% restocking fee normally applies. [01_refund_policy_current.md#RP-2]\n\nItems explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival. [01_refund_policy_current.md#RP-4]",
+        "citations": [
+          {
+            "evidence_id": "E1",
+            "quote": "Approved refunds return to the original payment method.",
+            "chunk_id": "bd9850073744f7e69fa169f27619aa94063f41082c18a57e6b22d9bb8aba9cb9",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-5",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "d30f228bc780b0be16688189b06dceaa7fea6a20d5067bc289f5e44520db9ebc",
+            "line_start": 19,
+            "line_end": 21
+          },
+          {
+            "evidence_id": "E2",
+            "quote": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+            "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-3",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+            "line_start": 13,
+            "line_end": 15
+          },
+          {
+            "evidence_id": "E4",
+            "quote": "Opened electronics may be returned within 30 calendar days of delivery. A 15% restocking fee normally applies.",
+            "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-2",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+            "line_start": 9,
+            "line_end": 12
+          },
+          {
+            "evidence_id": "E5",
+            "quote": "Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.",
+            "chunk_id": "bc8e11884f412c8ee3db919c0da4937d47f6838d957815dbcd56fca8bb8c06d3",
+            "source": "01_refund_policy_current.md",
+            "section": "RP-4",
+            "version": "3.0",
+            "status": "CURRENT",
+            "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+            "content_sha256": "477c314229fbb974e765023d69dfab73fb6fc1e15a2861b06949790cceecb9fc",
+            "line_start": 16,
+            "line_end": 18
+          }
+        ],
+        "abstention_reason": null,
+        "human_review_required": false,
+        "explanation_version": "extractive-explanation-v2",
+        "execution_allowed": false,
+        "evidence_is_untrusted_reference": true,
+        "generation": {
+          "raw": "{\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"Approved refunds return to the original payment method.\"},{\"evidence_id\":\"E2\",\"quote\":\"Premium customers do not pay the 15% restocking fee on opened electronics.\"},{\"evidence_id\":\"E4\",\"quote\":\"Opened electronics may be returned within 30 calendar days of delivery.\\nA 15% restocking fee normally applies.\"},{\"evidence_id\":\"E5\",\"quote\":\"Items explicitly marked FINAL SALE at purchase are not refundable unless defective on arrival.\"}],\"status\":\"answer\"}",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 507,
+            "completion_tokens": 117,
+            "total_tokens": 624
+          }
+        }
+      }
+    }
+  ],
+  "not_measured": {
+    "semantic_answer_correctness": null,
+    "semantic_citation_entailment": null
+  },
+  "limitations": [
+    "Small synthetic set; original labels and prior retrieval heldout inspected.",
+    "Gold-label citation precision is a relevance proxy, not semantic entailment.",
+    "Support precision is conditional on emitted, validated quotes.",
+    "Failures/invalid generations count as abstention; coverage reported separately.",
+    "Temperature zero and fixed seed do not guarantee cross-platform identical outputs."
+  ]
+}

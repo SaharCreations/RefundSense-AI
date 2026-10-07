@@ -1,0 +1,463 @@
+{
+  "status": "passed",
+  "demo_only": true,
+  "postgres_version": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+  "transport": "Real loopback HTTP through two separate Uvicorn processes",
+  "checks": [
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/assessments",
+      "expected_status": 401,
+      "actual_status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/assessments",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workflows",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workflows/b468aabe-8741-4cc7-9c8b-d277e0e3b2ed/decisions",
+      "expected_status": 403,
+      "actual_status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workflows/b468aabe-8741-4cc7-9c8b-d277e0e3b2ed/decisions",
+      "expected_status": 422,
+      "actual_status": 422
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workflows/b468aabe-8741-4cc7-9c8b-d277e0e3b2ed/decisions",
+      "expected_status": 409,
+      "actual_status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/policy/search",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workflows/b468aabe-8741-4cc7-9c8b-d277e0e3b2ed",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workflows/b468aabe-8741-4cc7-9c8b-d277e0e3b2ed/decisions",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workflows/b468aabe-8741-4cc7-9c8b-d277e0e3b2ed/decisions",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workflows/b468aabe-8741-4cc7-9c8b-d277e0e3b2ed/recover",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workflows/b468aabe-8741-4cc7-9c8b-d277e0e3b2ed/audit",
+      "expected_status": 200,
+      "actual_status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "expected_status": 204,
+      "actual_status": 204
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "expected_status": 401,
+      "actual_status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/openapi.json",
+      "expected_status": 200,
+      "actual_status": 200
+    }
+  ],
+  "session_survives_server_restart": true,
+  "approval_interrupt_survives_server_restart": true,
+  "ledger_rows": 1,
+  "duplicate_execution": false,
+  "assessment": {
+    "decision": "eligible",
+    "reason_code": "standard_return_eligible",
+    "refund_amount_minor": 8500,
+    "restocking_fee_minor": 1500,
+    "currency": "USD",
+    "candidate_payload": {
+      "action": "refund",
+      "organization_id": "ORG-DEMO",
+      "order_id": "O-HTTP-541e19ca",
+      "customer_id": "C-HTTP-541e19ca",
+      "refund_amount_minor": 8500,
+      "restocking_fee_minor": 1500,
+      "currency": "USD",
+      "payment_method": "card",
+      "original_payment_reference": "DEMO-PAYMENT-1001"
+    },
+    "assessment_only": true,
+    "execution_allowed": false,
+    "human_approval_required_for_execution": true,
+    "rules_version": "demo-assessment-v1",
+    "ruleset_fingerprint": "34030776655202d7fc671f0dce8ef3b9574db8920e371d43316bd6bb9ac07dd3",
+    "conventions": {
+      "status": "synthetic_demo_only",
+      "currency": "USD",
+      "money_unit": "integer_cents",
+      "restocking_base": "item_amount_actually_paid_excluding_shipping_and_tax",
+      "restocking_rounding": "half_up_to_one_cent",
+      "delivery_day": "day_zero",
+      "standard_window_last_day": "delivery_plus_30_calendar_days_inclusive",
+      "damage_reporting_last_day": "delivery_plus_7_calendar_days_inclusive",
+      "ordinary_refund": "item_amount_paid_minus_applicable_restocking_fee",
+      "scope": "one_physical_item_full_return_only"
+    },
+    "citations": [
+      {
+        "source": "01_refund_policy_current.md",
+        "section": "RP-1",
+        "version": "3.0",
+        "line_start": 6,
+        "line_end": 8,
+        "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+      },
+      {
+        "source": "01_refund_policy_current.md",
+        "section": "RP-2",
+        "version": "3.0",
+        "line_start": 9,
+        "line_end": 12,
+        "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+      },
+      {
+        "source": "01_refund_policy_current.md",
+        "section": "RP-5",
+        "version": "3.0",
+        "line_start": 19,
+        "line_end": 21,
+        "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+      }
+    ],
+    "snapshot": {
+      "order_revision": 1,
+      "customer_revision": 1,
+      "requested_on": "2026-10-07",
+      "facts_sha256": "4e49881b94e41dd4f38c6f536d1c03f28a25558e7d8cbe143361c333807458b8"
+    }
+  },
+  "pending": {
+    "workflow_id": "b468aabe-8741-4cc7-9c8b-d277e0e3b2ed",
+    "status": "pending",
+    "exact_execution_payload": {
+      "execution_target": "demo_ledger",
+      "idempotency_key": "2c8f8408-e89e-4146-9df7-c65221bab005",
+      "refund": {
+        "action": "refund",
+        "organization_id": "ORG-DEMO",
+        "order_id": "O-HTTP-541e19ca",
+        "customer_id": "C-HTTP-541e19ca",
+        "refund_amount_minor": 8500,
+        "restocking_fee_minor": 1500,
+        "currency": "USD",
+        "payment_method": "card",
+        "original_payment_reference": "DEMO-PAYMENT-1001"
+      }
+    },
+    "payload_sha256": "95bea1b4b0d58036dca96238bab13c947d852b849b5a8b96dfd19559f2a296d6",
+    "approval_ttl_seconds": 900,
+    "expires_at": null,
+    "assessment": {
+      "decision": "eligible",
+      "reason_code": "standard_return_eligible",
+      "refund_amount_minor": 8500,
+      "restocking_fee_minor": 1500,
+      "currency": "USD",
+      "candidate_payload": {
+        "action": "refund",
+        "currency": "USD",
+        "order_id": "O-HTTP-541e19ca",
+        "customer_id": "C-HTTP-541e19ca",
+        "payment_method": "card",
+        "organization_id": "ORG-DEMO",
+        "refund_amount_minor": 8500,
+        "restocking_fee_minor": 1500,
+        "original_payment_reference": "DEMO-PAYMENT-1001"
+      },
+      "assessment_only": true,
+      "execution_allowed": false,
+      "human_approval_required_for_execution": true,
+      "rules_version": "demo-assessment-v1",
+      "ruleset_fingerprint": "34030776655202d7fc671f0dce8ef3b9574db8920e371d43316bd6bb9ac07dd3",
+      "conventions": {
+        "scope": "one_physical_item_full_return_only",
+        "status": "synthetic_demo_only",
+        "currency": "USD",
+        "money_unit": "integer_cents",
+        "delivery_day": "day_zero",
+        "ordinary_refund": "item_amount_paid_minus_applicable_restocking_fee",
+        "restocking_base": "item_amount_actually_paid_excluding_shipping_and_tax",
+        "restocking_rounding": "half_up_to_one_cent",
+        "standard_window_last_day": "delivery_plus_30_calendar_days_inclusive",
+        "damage_reporting_last_day": "delivery_plus_7_calendar_days_inclusive"
+      },
+      "citations": [
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-1",
+          "version": "3.0",
+          "line_end": 8,
+          "line_start": 6,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        },
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-2",
+          "version": "3.0",
+          "line_end": 12,
+          "line_start": 9,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        },
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-5",
+          "version": "3.0",
+          "line_end": 21,
+          "line_start": 19,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        }
+      ],
+      "snapshot": {
+        "facts_sha256": "4e49881b94e41dd4f38c6f536d1c03f28a25558e7d8cbe143361c333807458b8",
+        "requested_on": "2026-10-07",
+        "order_revision": 1,
+        "customer_revision": 1
+      }
+    },
+    "result": null,
+    "demo_only": true
+  },
+  "executed": {
+    "workflow_id": "b468aabe-8741-4cc7-9c8b-d277e0e3b2ed",
+    "status": "executed",
+    "exact_execution_payload": {
+      "execution_target": "demo_ledger",
+      "idempotency_key": "2c8f8408-e89e-4146-9df7-c65221bab005",
+      "refund": {
+        "action": "refund",
+        "organization_id": "ORG-DEMO",
+        "order_id": "O-HTTP-541e19ca",
+        "customer_id": "C-HTTP-541e19ca",
+        "refund_amount_minor": 8500,
+        "restocking_fee_minor": 1500,
+        "currency": "USD",
+        "payment_method": "card",
+        "original_payment_reference": "DEMO-PAYMENT-1001"
+      }
+    },
+    "payload_sha256": "95bea1b4b0d58036dca96238bab13c947d852b849b5a8b96dfd19559f2a296d6",
+    "approval_ttl_seconds": 900,
+    "expires_at": "2026-10-07T09:24:43.364739+09:00",
+    "assessment": {
+      "decision": "eligible",
+      "reason_code": "standard_return_eligible",
+      "refund_amount_minor": 8500,
+      "restocking_fee_minor": 1500,
+      "currency": "USD",
+      "candidate_payload": {
+        "action": "refund",
+        "currency": "USD",
+        "order_id": "O-HTTP-541e19ca",
+        "customer_id": "C-HTTP-541e19ca",
+        "payment_method": "card",
+        "organization_id": "ORG-DEMO",
+        "refund_amount_minor": 8500,
+        "restocking_fee_minor": 1500,
+        "original_payment_reference": "DEMO-PAYMENT-1001"
+      },
+      "assessment_only": true,
+      "execution_allowed": false,
+      "human_approval_required_for_execution": true,
+      "rules_version": "demo-assessment-v1",
+      "ruleset_fingerprint": "34030776655202d7fc671f0dce8ef3b9574db8920e371d43316bd6bb9ac07dd3",
+      "conventions": {
+        "scope": "one_physical_item_full_return_only",
+        "status": "synthetic_demo_only",
+        "currency": "USD",
+        "money_unit": "integer_cents",
+        "delivery_day": "day_zero",
+        "ordinary_refund": "item_amount_paid_minus_applicable_restocking_fee",
+        "restocking_base": "item_amount_actually_paid_excluding_shipping_and_tax",
+        "restocking_rounding": "half_up_to_one_cent",
+        "standard_window_last_day": "delivery_plus_30_calendar_days_inclusive",
+        "damage_reporting_last_day": "delivery_plus_7_calendar_days_inclusive"
+      },
+      "citations": [
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-1",
+          "version": "3.0",
+          "line_end": 8,
+          "line_start": 6,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        },
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-2",
+          "version": "3.0",
+          "line_end": 12,
+          "line_start": 9,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        },
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-5",
+          "version": "3.0",
+          "line_end": 21,
+          "line_start": 19,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        }
+      ],
+      "snapshot": {
+        "facts_sha256": "4e49881b94e41dd4f38c6f536d1c03f28a25558e7d8cbe143361c333807458b8",
+        "requested_on": "2026-10-07",
+        "order_revision": 1,
+        "customer_revision": 1
+      }
+    },
+    "result": {
+      "status": "executed",
+      "currency": "USD",
+      "demo_only": true,
+      "ledger_id": "6cb3958e-bb55-47be-8b9f-4c99459408a8",
+      "executed_at": "2026-10-07T00:09:43.382692+00:00",
+      "payload_sha256": "95bea1b4b0d58036dca96238bab13c947d852b849b5a8b96dfd19559f2a296d6",
+      "idempotency_key": "2c8f8408-e89e-4146-9df7-c65221bab005",
+      "refund_amount_minor": 8500
+    },
+    "demo_only": true
+  },
+  "policy_search": {
+    "question": "What is the current opened electronics restocking fee?",
+    "scope": "current",
+    "as_of": "2026-10-07",
+    "collection_id": "ad1f2acb7bc2a94f71677d00bf5e6d193426e5db0072e7a73e29be4a93338e5d",
+    "retrieved": [
+      {
+        "text": "Opened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+        "title": "SampleCo Retail \u2014 Refund Policy",
+        "source": "01_refund_policy_current.md",
+        "status": "CURRENT",
+        "heading": "RP-2 Opened Electronics",
+        "section": "RP-2",
+        "version": "3.0",
+        "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+        "line_end": 12,
+        "line_start": 9,
+        "heading_path": [
+          "SampleCo Retail \u2014 Refund Policy",
+          "RP-2 Opened Electronics"
+        ],
+        "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+        "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+        "effective_date": "2026-09-01",
+        "embedding_text": "SampleCo Retail \u2014 Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-2 Opened Electronics\nOpened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+        "superseded_date": null,
+        "rank": 1,
+        "cosine_distance": 0.1896071660050337,
+        "cosine_similarity": 0.8103928339949663,
+        "untrusted_reference_material": true
+      },
+      {
+        "text": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+        "title": "SampleCo Retail \u2014 Refund Policy",
+        "source": "01_refund_policy_current.md",
+        "status": "CURRENT",
+        "heading": "RP-3 Premium Customer Exception",
+        "section": "RP-3",
+        "version": "3.0",
+        "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+        "line_end": 15,
+        "line_start": 13,
+        "heading_path": [
+          "SampleCo Retail \u2014 Refund Policy",
+          "RP-3 Premium Customer Exception"
+        ],
+        "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+        "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+        "effective_date": "2026-09-01",
+        "embedding_text": "SampleCo Retail \u2014 Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-3 Premium Customer Exception\nPremium customers do not pay the 15% restocking fee on opened electronics.",
+        "superseded_date": null,
+        "rank": 2,
+        "cosine_distance": 0.2376474794220118,
+        "cosine_similarity": 0.7623525205779882,
+        "untrusted_reference_material": true
+      },
+      {
+        "text": "Verified Premium customers have the opened-electronics restocking fee waived.",
+        "title": "SampleCo Retail \u2014 Premium Customer Policy",
+        "source": "04_premium_customer_policy.md",
+        "status": "CURRENT",
+        "heading": "PC-2 Restocking Benefit",
+        "section": "PC-2",
+        "version": "2.1",
+        "chunk_id": "8091d60b69c0d314c80d38ccca52b7cf07bbe595de2594e1ceb1cd3ce59d2b51",
+        "line_end": 11,
+        "line_start": 9,
+        "heading_path": [
+          "SampleCo Retail \u2014 Premium Customer Policy",
+          "PC-2 Restocking Benefit"
+        ],
+        "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+        "content_sha256": "86215419266c8d63f598194dbbcaa8f09732a66eaf303d3bb704042de7789613",
+        "effective_date": "2026-09-01",
+        "embedding_text": "SampleCo Retail \u2014 Premium Customer Policy\nVersion: 2.1\nStatus: CURRENT\nEffective date: 2026-09-01\nPC-2 Restocking Benefit\nVerified Premium customers have the opened-electronics restocking fee waived.",
+        "superseded_date": null,
+        "rank": 3,
+        "cosine_distance": 0.23900773408985632,
+        "cosine_similarity": 0.7609922659101437,
+        "untrusted_reference_material": true
+      }
+    ],
+    "evidence_only": true
+  },
+  "secrets_omitted": true
+}

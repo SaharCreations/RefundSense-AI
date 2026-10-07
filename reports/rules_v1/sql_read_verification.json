@@ -1,0 +1,42 @@
+{
+  "transaction_read_only": "on",
+  "transaction_isolation": "repeatable read",
+  "five_assessments_changed_order_state": false,
+  "orders": [
+    {
+      "order_id": "ORD-1001",
+      "paid_minor": 10000,
+      "refunded_minor": 0,
+      "revision": 1,
+      "refund_state": "none"
+    },
+    {
+      "order_id": "ORD-1002",
+      "paid_minor": 10000,
+      "refunded_minor": 0,
+      "revision": 1,
+      "refund_state": "none"
+    },
+    {
+      "order_id": "ORD-1003",
+      "paid_minor": 10000,
+      "refunded_minor": 0,
+      "revision": 1,
+      "refund_state": "none"
+    },
+    {
+      "order_id": "ORD-1004",
+      "paid_minor": 10000,
+      "refunded_minor": 0,
+      "revision": 1,
+      "refund_state": "none"
+    },
+    {
+      "order_id": "ORD-1005",
+      "paid_minor": 10000,
+      "refunded_minor": 0,
+      "revision": 1,
+      "refund_state": "none"
+    }
+  ]
+}

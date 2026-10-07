@@ -1,0 +1,258 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: RefundSense AI synthetic demo - ECS Fargate, private RDS PostgreSQL and private S3. Prepared only; no deployment is automated.
+Parameters:
+  ApiImage:
+    Type: String
+    Description: API image URI pinned to an ECR sha256 digest (build api.Dockerfile).
+    AllowedPattern: '.+@sha256:[a-f0-9]{64}'
+  WebImage:
+    Type: String
+    Description: Production Next.js image URI pinned to an ECR sha256 digest.
+    AllowedPattern: '.+@sha256:[a-f0-9]{64}'
+  CertificateArn:
+    Type: String
+    Description: Existing ACM certificate in this region covering WebOrigin.
+  WebOrigin:
+    Type: String
+    Description: Exact HTTPS origin; no trailing slash. Configure DNS to the ALB after deployment.
+    AllowedPattern: 'https://[A-Za-z0-9.-]+'
+  DatabaseClass:
+    Type: String
+    Default: db.t4g.micro
+    AllowedValues: [db.t4g.micro, db.t4g.small]
+  ServiceCount:
+    Type: Number
+    Default: 0
+    AllowedValues: [0, 1]
+    Description: Keep zero for infrastructure preparation. Start one only after approved setup.
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.32.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+  GatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties: {VpcId: !Ref Vpc, InternetGatewayId: !Ref InternetGateway}
+  PublicA:
+    Type: AWS::EC2::Subnet
+    Properties: {VpcId: !Ref Vpc, CidrBlock: 10.32.0.0/24, AvailabilityZone: !Select [0, !GetAZs ''], MapPublicIpOnLaunch: true}
+  PublicB:
+    Type: AWS::EC2::Subnet
+    Properties: {VpcId: !Ref Vpc, CidrBlock: 10.32.1.0/24, AvailabilityZone: !Select [1, !GetAZs ''], MapPublicIpOnLaunch: true}
+  PrivateA:
+    Type: AWS::EC2::Subnet
+    Properties: {VpcId: !Ref Vpc, CidrBlock: 10.32.10.0/24, AvailabilityZone: !Select [0, !GetAZs '']}
+  PrivateB:
+    Type: AWS::EC2::Subnet
+    Properties: {VpcId: !Ref Vpc, CidrBlock: 10.32.11.0/24, AvailabilityZone: !Select [1, !GetAZs '']}
+  PublicRoutes:
+    Type: AWS::EC2::RouteTable
+    Properties: {VpcId: !Ref Vpc}
+  InternetRoute:
+    Type: AWS::EC2::Route
+    DependsOn: GatewayAttachment
+    Properties: {RouteTableId: !Ref PublicRoutes, DestinationCidrBlock: 0.0.0.0/0, GatewayId: !Ref InternetGateway}
+  PublicRouteA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties: {SubnetId: !Ref PublicA, RouteTableId: !Ref PublicRoutes}
+  PublicRouteB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties: {SubnetId: !Ref PublicB, RouteTableId: !Ref PublicRoutes}
+  AlbSecurity:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Public HTTPS only
+      VpcId: !Ref Vpc
+      SecurityGroupIngress: [{IpProtocol: tcp, FromPort: 443, ToPort: 443, CidrIp: 0.0.0.0/0}]
+      SecurityGroupEgress: [{IpProtocol: tcp, FromPort: 3000, ToPort: 3000, CidrIp: 10.32.0.0/16}]
+  AppSecurity:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Next.js ingress from ALB; API stays inside task
+      VpcId: !Ref Vpc
+      SecurityGroupIngress: [{IpProtocol: tcp, FromPort: 3000, ToPort: 3000, SourceSecurityGroupId: !Ref AlbSecurity}]
+      SecurityGroupEgress:
+        - {IpProtocol: tcp, FromPort: 443, ToPort: 443, CidrIp: 0.0.0.0/0}
+        - {IpProtocol: tcp, FromPort: 5432, ToPort: 5432, CidrIp: 10.32.10.0/23}
+  DatabaseSecurity:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: PostgreSQL access from application tasks only
+      VpcId: !Ref Vpc
+      SecurityGroupIngress: [{IpProtocol: tcp, FromPort: 5432, ToPort: 5432, SourceSecurityGroupId: !Ref AppSecurity}]
+      SecurityGroupEgress: [{IpProtocol: tcp, FromPort: 5432, ToPort: 5432, CidrIp: 10.32.0.0/16}]
+  DbSubnets:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties: {DBSubnetGroupDescription: Private database subnets, SubnetIds: [!Ref PrivateA, !Ref PrivateB]}
+  DatabaseSecret:
+    Type: AWS::SecretsManager::Secret
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      Description: RefundSense AI demo database credentials; never placed in a task's plain environment
+      GenerateSecretString:
+        SecretStringTemplate: '{"username":"refundguard"}'
+        GenerateStringKey: password
+        PasswordLength: 32
+  Database:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Snapshot
+    UpdateReplacePolicy: Snapshot
+    Properties:
+      Engine: postgres
+      EngineVersion: '17.11'
+      DBInstanceClass: !Ref DatabaseClass
+      DBName: refundguard
+      MasterUsername: !Sub '{{resolve:secretsmanager:${DatabaseSecret}:SecretString:username}}'
+      MasterUserPassword: !Sub '{{resolve:secretsmanager:${DatabaseSecret}:SecretString:password}}'
+      AllocatedStorage: '20'
+      MaxAllocatedStorage: 30
+      StorageType: gp3
+      StorageEncrypted: true
+      PubliclyAccessible: false
+      MultiAZ: false
+      BackupRetentionPeriod: 7
+      DeletionProtection: true
+      AutoMinorVersionUpgrade: true
+      DBSubnetGroupName: !Ref DbSubnets
+      VPCSecurityGroups: [!Ref DatabaseSecurity]
+  Artifacts:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      VersioningConfiguration: {Status: Enabled}
+      BucketEncryption: {ServerSideEncryptionConfiguration: [{ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}}]}
+      PublicAccessBlockConfiguration: {BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true}
+      OwnershipControls: {Rules: [{ObjectOwnership: BucketOwnerEnforced}]}
+  ArtifactsPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref Artifacts
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Deny
+            Principal: '*'
+            Action: s3:*
+            Resource: [!GetAtt Artifacts.Arn, !Sub '${Artifacts.Arn}/*']
+            Condition: {Bool: {'aws:SecureTransport': false}}
+  Cluster:
+    Type: AWS::ECS::Cluster
+  Logs:
+    Type: AWS::Logs::LogGroup
+    Properties: {RetentionInDays: 14}
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement: [{Effect: Allow, Principal: {Service: ecs-tasks.amazonaws.com}, Action: 'sts:AssumeRole'}]
+      ManagedPolicyArns: [!Sub 'arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy']
+      Policies:
+        - PolicyName: ReadDatabaseSecret
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement: [{Effect: Allow, Action: 'secretsmanager:GetSecretValue', Resource: !Ref DatabaseSecret}]
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement: [{Effect: Allow, Principal: {Service: ecs-tasks.amazonaws.com}, Action: 'sts:AssumeRole'}]
+      Policies:
+        - PolicyName: ControlledEcsExec
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement: [{Effect: Allow, Action: ['ssmmessages:CreateControlChannel', 'ssmmessages:CreateDataChannel', 'ssmmessages:OpenControlChannel', 'ssmmessages:OpenDataChannel'], Resource: '*'}]
+  Task:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Cpu: '1024'
+      Memory: '3072'
+      NetworkMode: awsvpc
+      RequiresCompatibilities: [FARGATE]
+      RuntimePlatform: {CpuArchitecture: X86_64, OperatingSystemFamily: LINUX}
+      ExecutionRoleArn: !GetAtt ExecutionRole.Arn
+      TaskRoleArn: !GetAtt TaskRole.Arn
+      ContainerDefinitions:
+        - Name: api
+          Image: !Ref ApiImage
+          Essential: true
+          PortMappings: [{ContainerPort: 8000, Protocol: tcp}]
+          Environment:
+            - {Name: PGHOST, Value: !GetAtt Database.Endpoint.Address}
+            - {Name: PGPORT, Value: '5432'}
+            - {Name: PGDATABASE, Value: refundguard}
+            - {Name: PGSSLMODE, Value: verify-full}
+            - {Name: PGSSLROOTCERT, Value: /app/infra/aws/rds-ca.pem}
+            - {Name: REFUNDGUARD_MODEL_DIR, Value: /app/.cache/model}
+          Secrets:
+            - {Name: PGUSER, ValueFrom: !Sub '${DatabaseSecret}:username::'}
+            - {Name: PGPASSWORD, ValueFrom: !Sub '${DatabaseSecret}:password::'}
+          HealthCheck:
+            Command: [CMD, python, -c, 'import urllib.request; urllib.request.urlopen("http://127.0.0.1:8000/health", timeout=3)']
+            Interval: 15
+            Timeout: 5
+            Retries: 3
+            StartPeriod: 60
+          LogConfiguration:
+            LogDriver: awslogs
+            Options: {awslogs-group: !Ref Logs, awslogs-region: !Ref 'AWS::Region', awslogs-stream-prefix: api}
+        - Name: web
+          Image: !Ref WebImage
+          Essential: true
+          PortMappings: [{ContainerPort: 3000, Protocol: tcp}]
+          DependsOn: [{ContainerName: api, Condition: HEALTHY}]
+          Environment:
+            - {Name: REFUNDGUARD_API_URL, Value: 'http://127.0.0.1:8000'}
+            - {Name: REFUNDGUARD_WEB_ORIGIN, Value: !Ref WebOrigin}
+          LogConfiguration:
+            LogDriver: awslogs
+            Options: {awslogs-group: !Ref Logs, awslogs-region: !Ref 'AWS::Region', awslogs-stream-prefix: web}
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    DependsOn: GatewayAttachment
+    Properties: {Type: application, Scheme: internet-facing, Subnets: [!Ref PublicA, !Ref PublicB], SecurityGroups: [!Ref AlbSecurity]}
+  Target:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      VpcId: !Ref Vpc
+      Port: 3000
+      Protocol: HTTP
+      TargetType: ip
+      HealthCheckPath: /
+      Matcher: {HttpCode: '200'}
+  HttpsListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      SslPolicy: ELBSecurityPolicy-TLS13-1-2-2021-06
+      Certificates: [{CertificateArn: !Ref CertificateArn}]
+      DefaultActions: [{Type: forward, TargetGroupArn: !Ref Target}]
+  Service:
+    Type: AWS::ECS::Service
+    DependsOn: [HttpsListener, InternetRoute]
+    Properties:
+      Cluster: !Ref Cluster
+      TaskDefinition: !Ref Task
+      DesiredCount: !Ref ServiceCount
+      LaunchType: FARGATE
+      EnableExecuteCommand: true
+      DeploymentConfiguration: {DeploymentCircuitBreaker: {Enable: true, Rollback: true}}
+      NetworkConfiguration:
+        AwsvpcConfiguration: {AssignPublicIp: ENABLED, Subnets: [!Ref PublicA, !Ref PublicB], SecurityGroups: [!Ref AppSecurity]}
+      LoadBalancers: [{ContainerName: web, ContainerPort: 3000, TargetGroupArn: !Ref Target}]
+Outputs:
+  ClusterName: {Value: !Ref Cluster}
+  TaskDefinition: {Value: !Ref Task}
+  ServiceName: {Value: !GetAtt Service.Name}
+  LoadBalancerDns: {Value: !GetAtt LoadBalancer.DNSName}
+  DatabaseEndpoint: {Value: !GetAtt Database.Endpoint.Address}
+  ArtifactsBucket: {Value: !Ref Artifacts}

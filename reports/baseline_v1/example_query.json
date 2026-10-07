@@ -1,0 +1,84 @@
+{
+  "question": "What is the current opened-electronics restocking fee?",
+  "scope": "current",
+  "as_of": "2026-10-06",
+  "collection_id": "ad1f2acb7bc2a94f71677d00bf5e6d193426e5db0072e7a73e29be4a93338e5d",
+  "warning": "Retrieved evidence only. Historical text cannot authorize refunds.",
+  "retrieved": [
+    {
+      "text": "Opened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+      "title": "SampleCo Retail — Refund Policy",
+      "source": "01_refund_policy_current.md",
+      "status": "CURRENT",
+      "heading": "RP-2 Opened Electronics",
+      "section": "RP-2",
+      "version": "3.0",
+      "chunk_id": "8fe4c0f470bc844610003a6e50d3c13effd4f3cd04fdae8c5f7f7cf18848c8f6",
+      "line_end": 12,
+      "line_start": 9,
+      "heading_path": [
+        "SampleCo Retail — Refund Policy",
+        "RP-2 Opened Electronics"
+      ],
+      "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+      "content_sha256": "5bb4667f59b544e3a08714879118e86bbf51cf684a59718b2bb17e10be469a68",
+      "effective_date": "2026-09-01",
+      "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-2 Opened Electronics\nOpened electronics may be returned within 30 calendar days of delivery.\nA 15% restocking fee normally applies.",
+      "superseded_date": null,
+      "rank": 1,
+      "cosine_distance": 0.19216644880671196,
+      "cosine_similarity": 0.807833551193288,
+      "untrusted_reference_material": true
+    },
+    {
+      "text": "Premium customers do not pay the 15% restocking fee on opened electronics.",
+      "title": "SampleCo Retail — Refund Policy",
+      "source": "01_refund_policy_current.md",
+      "status": "CURRENT",
+      "heading": "RP-3 Premium Customer Exception",
+      "section": "RP-3",
+      "version": "3.0",
+      "chunk_id": "1c3447b21ab44e66e67188d0dd58ecc629fe559ac6a4ccb225f108b25f6df51c",
+      "line_end": 15,
+      "line_start": 13,
+      "heading_path": [
+        "SampleCo Retail — Refund Policy",
+        "RP-3 Premium Customer Exception"
+      ],
+      "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019",
+      "content_sha256": "49d9e7389bfce0040730f311405ec964f65891ef596eb2bd7c86495bc2b0f1d9",
+      "effective_date": "2026-09-01",
+      "embedding_text": "SampleCo Retail — Refund Policy\nVersion: 3.0\nStatus: CURRENT\nEffective date: 2026-09-01\nRP-3 Premium Customer Exception\nPremium customers do not pay the 15% restocking fee on opened electronics.",
+      "superseded_date": null,
+      "rank": 2,
+      "cosine_distance": 0.2396797848129043,
+      "cosine_similarity": 0.7603202151870957,
+      "untrusted_reference_material": true
+    },
+    {
+      "text": "Verified Premium customers have the opened-electronics restocking fee waived.",
+      "title": "SampleCo Retail — Premium Customer Policy",
+      "source": "04_premium_customer_policy.md",
+      "status": "CURRENT",
+      "heading": "PC-2 Restocking Benefit",
+      "section": "PC-2",
+      "version": "2.1",
+      "chunk_id": "8091d60b69c0d314c80d38ccca52b7cf07bbe595de2594e1ceb1cd3ce59d2b51",
+      "line_end": 11,
+      "line_start": 9,
+      "heading_path": [
+        "SampleCo Retail — Premium Customer Policy",
+        "PC-2 Restocking Benefit"
+      ],
+      "source_sha256": "302a4556e941860461f2f5f35179d495d74d3be016f829ced32dc926e648272d",
+      "content_sha256": "86215419266c8d63f598194dbbcaa8f09732a66eaf303d3bb704042de7789613",
+      "effective_date": "2026-09-01",
+      "embedding_text": "SampleCo Retail — Premium Customer Policy\nVersion: 2.1\nStatus: CURRENT\nEffective date: 2026-09-01\nPC-2 Restocking Benefit\nVerified Premium customers have the opened-electronics restocking fee waived.",
+      "superseded_date": null,
+      "rank": 3,
+      "cosine_distance": 0.24068491438479567,
+      "cosine_similarity": 0.7593150856152043,
+      "untrusted_reference_material": true
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "eligible_for_promotion": false,
+  "checks": {
+    "answerable_coverage": false,
+    "citation_precision": true,
+    "unknown_abstention": true,
+    "model_outputs_blocked": true
+  },
+  "failed_gates": [
+    "answerable_coverage"
+  ],
+  "selection_source": "Original development only",
+  "development_report_sha256": "ce2dd369132d5cb027b30c3acc5fd4b2bdc9d9a9a722be055face7a4b09496e7",
+  "predeclared_protocol_sha256": "5c5c1a20b25d1560776623082ed220b66a1a1d037203f74dc286203f16d59b5c",
+  "criteria": {
+    "minimum_answerable_coverage": 0.8125,
+    "minimum_gold_label_citation_precision": 0.9,
+    "required_unknown_abstention_rate": 1.0,
+    "maximum_model_outputs_blocked": 0
+  },
+  "metrics": {
+    "citation_correctness": {
+      "numerator": 8,
+      "denominator": 8,
+      "value": 1.0
+    },
+    "citation_verbatim_support": {
+      "numerator": 8,
+      "denominator": 8,
+      "value": 1.0
+    },
+    "abstention_accuracy": {
+      "numerator": 12,
+      "denominator": 20,
+      "value": 0.6
+    },
+    "answerable_coverage": {
+      "numerator": 8,
+      "denominator": 16,
+      "value": 0.5
+    },
+    "unanswerable_abstention_rate": {
+      "numerator": 4,
+      "denominator": 4,
+      "value": 1.0
+    },
+    "behavior_counts": {
+      "answerable_answered": 8,
+      "answerable_abstained": 8,
+      "unanswerable_abstained": 4,
+      "unanswerable_answered": 0
+    },
+    "model_outputs_blocked": 0
+  },
+  "default_files_modified_by_this_command": false
+}

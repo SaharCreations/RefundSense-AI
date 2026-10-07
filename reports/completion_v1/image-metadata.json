@@ -1,0 +1,20 @@
+[
+  {
+    "repository": "library/python",
+    "tag": "3.12.14-slim-bookworm",
+    "available": true,
+    "digest": "sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e"
+  },
+  {
+    "repository": "library/node",
+    "tag": "24.19.0-bookworm-slim",
+    "available": true,
+    "digest": "sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df"
+  },
+  {
+    "repository": "pgvector/pgvector",
+    "tag": "0.8.1-pg17",
+    "available": true,
+    "digest": "sha256:3e8b3adfd27b5707128f60956f62a793c3c9326ea8cfaf0eab7adccb5d700b21"
+  }
+]

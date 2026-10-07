@@ -1,0 +1,507 @@
+{
+  "version": 1,
+  "split_frozen_before_scoring": true,
+  "limitations": "30 hand-labeled synthetic scenarios for the documented demo conventions. Fixed 20 dev / 10 held-out case split, not a blind external benchmark. Scores do not verify payment execution, native database isolation, or production policy approval.",
+  "base_customer": {
+    "organization_id": "ORG-DEMO",
+    "customer_id": "CUST-1001",
+    "premium_verified": false,
+    "revision": 1
+  },
+  "base_order": {
+    "organization_id": "ORG-DEMO",
+    "order_id": "ORD-1001",
+    "customer_id": "CUST-1001",
+    "policy_bundle_id": "sampleco-september-2026",
+    "product_type": "ordinary",
+    "item_count": 1,
+    "delivered_on": "2026-10-01",
+    "delivery_status": "delivered",
+    "opened": false,
+    "final_sale": false,
+    "damage_on_arrival_verified": false,
+    "damage_reported_on": null,
+    "paid_minor": 10000,
+    "refunded_minor": 0,
+    "currency": "USD",
+    "payment_status": "paid",
+    "payment_method": "card",
+    "payment_reference": "DEMO-PAYMENT-1001",
+    "refund_state": "none",
+    "revision": 1
+  },
+  "base_request": {
+    "order_id": "ORD-1001",
+    "customer_id": "CUST-1001",
+    "requested_on": "2026-10-06",
+    "reason": "standard_return",
+    "refund_method": "original_payment",
+    "include_shipping": false,
+    "include_tax": false
+  },
+  "cases": [
+    {
+      "id": "R01",
+      "split": "dev",
+      "description": "Ordinary item five days after delivery",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "standard_return_eligible",
+        "refund_amount_minor": 10000,
+        "restocking_fee_minor": 0
+      }
+    },
+    {
+      "id": "R02",
+      "split": "dev",
+      "description": "Day 30 is included by the demo convention",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "standard_return_eligible",
+        "refund_amount_minor": 10000,
+        "restocking_fee_minor": 0
+      },
+      "order": {
+        "delivered_on": "2026-09-06"
+      }
+    },
+    {
+      "id": "R03",
+      "split": "dev",
+      "description": "Day 31 is outside the normal return window",
+      "expected": {
+        "decision": "ineligible",
+        "reason_code": "return_window_expired",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "delivered_on": "2026-09-05"
+      }
+    },
+    {
+      "id": "R04",
+      "split": "dev",
+      "description": "Opened electronics have a 15 percent fee",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "standard_return_eligible",
+        "refund_amount_minor": 8500,
+        "restocking_fee_minor": 1500
+      },
+      "order": {
+        "product_type": "electronics",
+        "opened": true
+      }
+    },
+    {
+      "id": "R05",
+      "split": "dev",
+      "description": "SQL-verified Premium waives the fee",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "standard_return_eligible",
+        "refund_amount_minor": 10000,
+        "restocking_fee_minor": 0
+      },
+      "order": {
+        "product_type": "electronics",
+        "opened": true
+      },
+      "customer": {
+        "premium_verified": true
+      }
+    },
+    {
+      "id": "R06",
+      "split": "dev",
+      "description": "Premium does not extend the window",
+      "expected": {
+        "decision": "ineligible",
+        "reason_code": "return_window_expired",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "delivered_on": "2026-09-05"
+      },
+      "customer": {
+        "premium_verified": true
+      }
+    },
+    {
+      "id": "R07",
+      "split": "dev",
+      "description": "Final-sale item without a damage exception",
+      "expected": {
+        "decision": "ineligible",
+        "reason_code": "final_sale_without_timely_damage_exception",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "final_sale": true
+      }
+    },
+    {
+      "id": "R08",
+      "split": "dev",
+      "description": "Timely verified damage overrides final sale",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "damaged_on_arrival_exception",
+        "refund_amount_minor": 10000,
+        "restocking_fee_minor": 0
+      },
+      "order": {
+        "final_sale": true,
+        "damage_on_arrival_verified": true,
+        "damage_reported_on": "2026-10-06"
+      },
+      "request": {
+        "reason": "damaged_on_arrival"
+      }
+    },
+    {
+      "id": "R09",
+      "split": "dev",
+      "description": "Final-sale damage reported after seven days",
+      "expected": {
+        "decision": "ineligible",
+        "reason_code": "final_sale_without_timely_damage_exception",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "final_sale": true,
+        "delivered_on": "2026-09-06",
+        "damage_on_arrival_verified": true,
+        "damage_reported_on": "2026-09-14"
+      },
+      "request": {
+        "reason": "damaged_on_arrival"
+      }
+    },
+    {
+      "id": "R10",
+      "split": "dev",
+      "description": "Hazardous liquids have no refund rule",
+      "expected": {
+        "decision": "review",
+        "reason_code": "unsupported_product_or_multi_item_order",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "product_type": "hazardous_liquids"
+      }
+    },
+    {
+      "id": "R11",
+      "split": "dev",
+      "description": "Carrier-lost shipment uses another workflow",
+      "expected": {
+        "decision": "review",
+        "reason_code": "use_shipment_resolution",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "delivery_status": "lost"
+      }
+    },
+    {
+      "id": "R12",
+      "split": "dev",
+      "description": "Store credit is undefined",
+      "expected": {
+        "decision": "review",
+        "reason_code": "unsupported_refund_method",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "request": {
+        "refund_method": "store_credit"
+      }
+    },
+    {
+      "id": "R13",
+      "split": "dev",
+      "description": "Partial-refund fee allocation is undefined",
+      "expected": {
+        "decision": "review",
+        "reason_code": "partial_refund_history_needs_review",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "refunded_minor": 1000
+      }
+    },
+    {
+      "id": "R14",
+      "split": "dev",
+      "description": "A fully refunded order has no remaining payment",
+      "expected": {
+        "decision": "ineligible",
+        "reason_code": "nothing_remaining_to_refund",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "refunded_minor": 10000
+      }
+    },
+    {
+      "id": "R15",
+      "split": "dev",
+      "description": "Unknown Premium status cannot be inferred",
+      "expected": {
+        "decision": "review",
+        "reason_code": "premium_record_status_missing",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "product_type": "electronics",
+        "opened": true
+      },
+      "customer": {
+        "premium_verified": null
+      }
+    },
+    {
+      "id": "R16",
+      "split": "dev",
+      "description": "Missing final-sale flag pauses assessment",
+      "expected": {
+        "decision": "review",
+        "reason_code": "final_sale_flag_missing",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "final_sale": null
+      }
+    },
+    {
+      "id": "R17",
+      "split": "dev",
+      "description": "Damaged opened-electronics fee interaction is undefined",
+      "expected": {
+        "decision": "review",
+        "reason_code": "damaged_opened_electronics_fee_undefined",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "product_type": "electronics",
+        "opened": true,
+        "damage_on_arrival_verified": true,
+        "damage_reported_on": "2026-10-03"
+      },
+      "request": {
+        "reason": "damaged_on_arrival"
+      }
+    },
+    {
+      "id": "R18",
+      "split": "dev",
+      "description": "Original payment reference missing",
+      "expected": {
+        "decision": "review",
+        "reason_code": "original_payment_details_missing",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "payment_reference": null
+      }
+    },
+    {
+      "id": "R19",
+      "split": "dev",
+      "description": "Historical policy is not silently mapped to current rules",
+      "expected": {
+        "decision": "review",
+        "reason_code": "unsupported_policy_bundle",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "policy_bundle_id": "sampleco-january-2026"
+      }
+    },
+    {
+      "id": "R20",
+      "split": "dev",
+      "description": "Outbound shipping is not automatically refundable",
+      "expected": {
+        "decision": "review",
+        "reason_code": "shipping_refund_not_authorized",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "request": {
+        "include_shipping": true
+      }
+    },
+    {
+      "id": "R21",
+      "split": "heldout",
+      "description": "Ten cents times 15 percent rounds half up from 1.5 to two cents",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "standard_return_eligible",
+        "refund_amount_minor": 8,
+        "restocking_fee_minor": 2
+      },
+      "order": {
+        "product_type": "electronics",
+        "opened": true,
+        "paid_minor": 10
+      }
+    },
+    {
+      "id": "R22",
+      "split": "heldout",
+      "description": "Premium waives the fee for timely reported damaged final-sale electronics, even after day 30",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "damaged_on_arrival_exception",
+        "refund_amount_minor": 10000,
+        "restocking_fee_minor": 0
+      },
+      "order": {
+        "product_type": "electronics",
+        "opened": true,
+        "final_sale": true,
+        "delivered_on": "2026-09-01",
+        "damage_on_arrival_verified": true,
+        "damage_reported_on": "2026-09-08"
+      },
+      "customer": {
+        "premium_verified": true
+      },
+      "request": {
+        "reason": "damaged_on_arrival"
+      }
+    },
+    {
+      "id": "R23",
+      "split": "heldout",
+      "description": "A late damage report can still use ordinary return eligibility on day 30",
+      "expected": {
+        "decision": "eligible",
+        "reason_code": "standard_return_eligible",
+        "refund_amount_minor": 10000,
+        "restocking_fee_minor": 0
+      },
+      "order": {
+        "delivered_on": "2026-09-06",
+        "damage_on_arrival_verified": true,
+        "damage_reported_on": "2026-09-14"
+      },
+      "request": {
+        "reason": "damaged_on_arrival"
+      }
+    },
+    {
+      "id": "R24",
+      "split": "heldout",
+      "description": "Future delivery date is inconsistent",
+      "expected": {
+        "decision": "review",
+        "reason_code": "delivery_date_in_future",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "delivered_on": "2026-10-07"
+      }
+    },
+    {
+      "id": "R25",
+      "split": "heldout",
+      "description": "Multiple-item allocations are outside this demo",
+      "expected": {
+        "decision": "review",
+        "reason_code": "unsupported_product_or_multi_item_order",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "item_count": 2
+      }
+    },
+    {
+      "id": "R26",
+      "split": "heldout",
+      "description": "Tax treatment is not defined",
+      "expected": {
+        "decision": "review",
+        "reason_code": "tax_refund_policy_missing",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "request": {
+        "include_tax": true
+      }
+    },
+    {
+      "id": "R27",
+      "split": "heldout",
+      "description": "Unsupported currency needs review",
+      "expected": {
+        "decision": "review",
+        "reason_code": "unsupported_currency",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "currency": "JPY"
+      }
+    },
+    {
+      "id": "R28",
+      "split": "heldout",
+      "description": "Existing pending refund prevents another eligible candidate",
+      "expected": {
+        "decision": "review",
+        "reason_code": "existing_refund_state_needs_review",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "refund_state": "pending"
+      }
+    },
+    {
+      "id": "R29",
+      "split": "heldout",
+      "description": "Missing opened status cannot be guessed",
+      "expected": {
+        "decision": "review",
+        "reason_code": "opened_flag_missing",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "order": {
+        "product_type": "electronics",
+        "opened": null
+      }
+    },
+    {
+      "id": "R30",
+      "split": "heldout",
+      "description": "Knowing another organization order ID gives no access",
+      "expected": {
+        "decision": "unavailable",
+        "reason_code": "record_unavailable",
+        "refund_amount_minor": null,
+        "restocking_fee_minor": null
+      },
+      "organization_id": "ORG-OTHER"
+    }
+  ]
+}

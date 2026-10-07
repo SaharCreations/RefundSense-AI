@@ -1,0 +1,41 @@
+{
+  "decision": "ineligible",
+  "reason_code": "final_sale_without_timely_damage_exception",
+  "refund_amount_minor": null,
+  "restocking_fee_minor": null,
+  "currency": "USD",
+  "candidate_payload": null,
+  "assessment_only": true,
+  "execution_allowed": false,
+  "human_approval_required_for_execution": true,
+  "rules_version": "demo-assessment-v1",
+  "ruleset_fingerprint": "34030776655202d7fc671f0dce8ef3b9574db8920e371d43316bd6bb9ac07dd3",
+  "conventions": {
+    "status": "synthetic_demo_only",
+    "currency": "USD",
+    "money_unit": "integer_cents",
+    "restocking_base": "item_amount_actually_paid_excluding_shipping_and_tax",
+    "restocking_rounding": "half_up_to_one_cent",
+    "delivery_day": "day_zero",
+    "standard_window_last_day": "delivery_plus_30_calendar_days_inclusive",
+    "damage_reporting_last_day": "delivery_plus_7_calendar_days_inclusive",
+    "ordinary_refund": "item_amount_paid_minus_applicable_restocking_fee",
+    "scope": "one_physical_item_full_return_only"
+  },
+  "citations": [
+    {
+      "source": "01_refund_policy_current.md",
+      "section": "RP-4",
+      "version": "3.0",
+      "line_start": 16,
+      "line_end": 18,
+      "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+    }
+  ],
+  "snapshot": {
+    "order_revision": 1,
+    "customer_revision": 1,
+    "requested_on": "2026-10-06",
+    "facts_sha256": "4029b8db95bc3139f236a3c20a4a243ef6ab32417c65de093c19848dfd0da46a"
+  }
+}

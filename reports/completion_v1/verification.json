@@ -1,0 +1,85 @@
+{
+  "python_passed": 174,
+  "python_skipped": 7,
+  "native_pending_tests": [
+    "test_partial_ingestion_is_rolled_back",
+    "test_database_enforces_immutability[payload]",
+    "test_database_enforces_immutability[approval]",
+    "test_database_enforces_immutability[audit]",
+    "test_database_enforces_immutability[ledger]",
+    "test_concurrent_independent_sessions_cannot_double_refund[True]",
+    "test_concurrent_independent_sessions_cannot_double_refund[False]"
+  ],
+  "live_browser": {
+    "startTime": "2026-10-07T02:49:18.669Z",
+    "duration": 23624.976,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "frontend_boundary_passed": 11,
+  "standalone_build": "passed",
+  "typecheck": "passed",
+  "aws_schema": "cfn-lint 1.57.2 passed, no deployment",
+  "actions_syntax": "actionlint 1.7.12 passed, no remote run",
+  "docker": "Compose JSON schema and Dockerfile structure passed; engine unavailable; image builds unrun",
+  "images": "Official public registry metadata verified and digests pinned",
+  "live_stack": {
+    "scope": "real browser, Next.js, FastAPI, psycopg, official PostgreSQL LangGraph checkpoints and synthetic SQL ledger",
+    "postgres_version": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+    "pgvector_version": "0.8.1",
+    "pglite": true,
+    "retrieval": true,
+    "original_seed_unchanged": true,
+    "synthetic_order_results": [
+      {
+        "order_id": "O-LIVE-approve-09663f77",
+        "refunded_minor": 8500,
+        "refund_state": "refunded"
+      },
+      {
+        "order_id": "O-LIVE-pending-09663f77",
+        "refunded_minor": 0,
+        "refund_state": "none"
+      },
+      {
+        "order_id": "O-LIVE-reject-09663f77",
+        "refunded_minor": 0,
+        "refund_state": "none"
+      },
+      {
+        "order_id": "O-LIVE-stale-09663f77",
+        "refunded_minor": 0,
+        "refund_state": "none"
+      }
+    ],
+    "approved_order_ledger_entries": 1,
+    "credentials_saved_in_report": false
+  },
+  "video": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 900
+      }
+    ],
+    "format": {
+      "duration": "16.360000",
+      "size": "639510"
+    }
+  },
+  "preserved_previous_reports": 69,
+  "original_data_and_model_defaults_unchanged": true,
+  "live_cloud_or_real_payments": false,
+  "approval_dependent_steps_skipped": [
+    "AWS deployment",
+    "Remote repository/CI access"
+  ],
+  "environment_dependent_gates": [
+    "Native PostgreSQL seven checks",
+    "Docker image builds/startup"
+  ]
+}

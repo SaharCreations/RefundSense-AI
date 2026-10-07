@@ -1,0 +1,1178 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "RefundGuard AI",
+    "description": "Authenticated portfolio demo; no real payment gateway.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "summary": "Login",
+        "operationId": "login_api_v1_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "summary": "Me",
+        "operationId": "me_api_v1_auth_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentityResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "summary": "Logout",
+        "operationId": "logout_api_v1_auth_logout_post",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assessments": {
+      "post": {
+        "summary": "Assessment",
+        "operationId": "assessment_api_v1_assessments_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssessmentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/workflows": {
+      "post": {
+        "summary": "Propose",
+        "operationId": "propose_api_v1_workflows_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/WorkflowResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BlockedResponse"
+                    }
+                  ],
+                  "title": "Response Propose Api V1 Workflows Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/workflows/{wid}": {
+      "get": {
+        "summary": "View",
+        "operationId": "view_api_v1_workflows__wid__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "wid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Wid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/workflows/{wid}/decisions": {
+      "post": {
+        "summary": "Decide",
+        "operationId": "decide_api_v1_workflows__wid__decisions_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "wid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Wid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Decision"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/workflows/{wid}/recover": {
+      "post": {
+        "summary": "Recover",
+        "operationId": "recover_api_v1_workflows__wid__recover_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "wid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Wid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/workflows/{wid}/audit": {
+      "get": {
+        "summary": "Audit",
+        "operationId": "audit_api_v1_workflows__wid__audit_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "wid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Wid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/policy/search": {
+      "post": {
+        "summary": "Search",
+        "operationId": "search_api_v1_policy_search_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Search"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvidenceResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/policy/answer": {
+      "post": {
+        "summary": "Policy Answer",
+        "operationId": "policy_answer_api_v1_policy_answer_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Search"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyAnswerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/assessments/explain": {
+      "post": {
+        "summary": "Explain Assessment",
+        "operationId": "explain_assessment_api_v1_assessments_explain_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssessmentExplanationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AssessmentExplanationResponse": {
+        "properties": {
+          "authoritative_assessment": {
+            "$ref": "#/components/schemas/AssessmentResponse"
+          },
+          "deterministic_summary": {
+            "type": "string",
+            "title": "Deterministic Summary"
+          },
+          "policy_explanation": {
+            "$ref": "#/components/schemas/ExplanationResponse"
+          },
+          "selector": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Selector"
+          }
+        },
+        "type": "object",
+        "required": [
+          "authoritative_assessment",
+          "deterministic_summary",
+          "policy_explanation",
+          "selector"
+        ],
+        "title": "AssessmentExplanationResponse"
+      },
+      "AssessmentResponse": {
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "eligible",
+              "ineligible",
+              "review"
+            ],
+            "title": "Decision"
+          },
+          "reason_code": {
+            "type": "string",
+            "title": "Reason Code"
+          },
+          "refund_amount_minor": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Refund Amount Minor"
+          },
+          "restocking_fee_minor": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Restocking Fee Minor"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "candidate_payload": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Candidate Payload"
+          },
+          "assessment_only": {
+            "type": "boolean",
+            "title": "Assessment Only"
+          },
+          "execution_allowed": {
+            "type": "boolean",
+            "title": "Execution Allowed"
+          },
+          "human_approval_required_for_execution": {
+            "type": "boolean",
+            "title": "Human Approval Required For Execution"
+          },
+          "rules_version": {
+            "type": "string",
+            "title": "Rules Version"
+          },
+          "ruleset_fingerprint": {
+            "type": "string",
+            "title": "Ruleset Fingerprint"
+          },
+          "conventions": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Conventions"
+          },
+          "citations": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Citations"
+          },
+          "snapshot": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Snapshot"
+          }
+        },
+        "type": "object",
+        "required": [
+          "decision",
+          "reason_code",
+          "refund_amount_minor",
+          "restocking_fee_minor",
+          "currency",
+          "candidate_payload",
+          "assessment_only",
+          "execution_allowed",
+          "human_approval_required_for_execution",
+          "rules_version",
+          "ruleset_fingerprint",
+          "conventions",
+          "citations",
+          "snapshot"
+        ],
+        "title": "AssessmentResponse"
+      },
+      "BlockedResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "assessment_blocked",
+            "title": "Status"
+          },
+          "assessment": {
+            "$ref": "#/components/schemas/AssessmentResponse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "assessment"
+        ],
+        "title": "BlockedResponse"
+      },
+      "Decision": {
+        "properties": {
+          "approved": {
+            "type": "boolean",
+            "title": "Approved"
+          },
+          "payload_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Payload Sha256"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "approved",
+          "payload_sha256"
+        ],
+        "title": "Decision"
+      },
+      "EvidenceResponse": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "scope": {
+            "type": "string",
+            "const": "current",
+            "title": "Scope"
+          },
+          "as_of": {
+            "type": "string",
+            "title": "As Of"
+          },
+          "collection_id": {
+            "type": "string",
+            "title": "Collection Id"
+          },
+          "retrieved": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Retrieved"
+          },
+          "evidence_only": {
+            "type": "boolean",
+            "title": "Evidence Only"
+          }
+        },
+        "type": "object",
+        "required": [
+          "question",
+          "scope",
+          "as_of",
+          "collection_id",
+          "retrieved",
+          "evidence_only"
+        ],
+        "title": "EvidenceResponse"
+      },
+      "ExecutionPayload": {
+        "properties": {
+          "execution_target": {
+            "type": "string",
+            "const": "demo_ledger",
+            "title": "Execution Target"
+          },
+          "idempotency_key": {
+            "type": "string",
+            "title": "Idempotency Key"
+          },
+          "refund": {
+            "$ref": "#/components/schemas/RefundPayload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "execution_target",
+          "idempotency_key",
+          "refund"
+        ],
+        "title": "ExecutionPayload"
+      },
+      "ExplanationResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "answered",
+              "abstain"
+            ],
+            "title": "Status"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "citations": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Citations"
+          },
+          "abstention_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abstention Reason"
+          },
+          "human_review_required": {
+            "type": "boolean",
+            "title": "Human Review Required"
+          },
+          "explanation_version": {
+            "type": "string",
+            "title": "Explanation Version"
+          },
+          "execution_allowed": {
+            "type": "boolean",
+            "const": false,
+            "title": "Execution Allowed"
+          },
+          "evidence_is_untrusted_reference": {
+            "type": "boolean",
+            "title": "Evidence Is Untrusted Reference"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "explanation",
+          "citations",
+          "abstention_reason",
+          "human_review_required",
+          "explanation_version",
+          "execution_allowed",
+          "evidence_is_untrusted_reference"
+        ],
+        "title": "ExplanationResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "IdentityResponse": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "organization_id": {
+            "type": "string",
+            "title": "Organization Id"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "support",
+              "reviewer"
+            ],
+            "title": "Role"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "organization_id",
+          "role"
+        ],
+        "title": "IdentityResponse"
+      },
+      "Login": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "User Id"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "format": "password",
+            "title": "Password",
+            "writeOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "user_id",
+          "password"
+        ],
+        "title": "Login"
+      },
+      "OrderInput": {
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Order Id"
+          },
+          "customer_id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Customer Id"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "standard_return",
+              "damaged_on_arrival",
+              "warranty"
+            ],
+            "title": "Reason",
+            "default": "standard_return"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "order_id",
+          "customer_id"
+        ],
+        "title": "OrderInput"
+      },
+      "PolicyAnswerResponse": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "as_of": {
+            "type": "string",
+            "title": "As Of"
+          },
+          "collection_id": {
+            "type": "string",
+            "title": "Collection Id"
+          },
+          "retrieval_scope": {
+            "type": "string",
+            "const": "all",
+            "title": "Retrieval Scope"
+          },
+          "answer": {
+            "$ref": "#/components/schemas/ExplanationResponse"
+          },
+          "selector": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Selector"
+          }
+        },
+        "type": "object",
+        "required": [
+          "question",
+          "as_of",
+          "collection_id",
+          "retrieval_scope",
+          "answer",
+          "selector"
+        ],
+        "title": "PolicyAnswerResponse"
+      },
+      "RefundPayload": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "const": "refund",
+            "title": "Action"
+          },
+          "organization_id": {
+            "type": "string",
+            "title": "Organization Id"
+          },
+          "order_id": {
+            "type": "string",
+            "title": "Order Id"
+          },
+          "customer_id": {
+            "type": "string",
+            "title": "Customer Id"
+          },
+          "refund_amount_minor": {
+            "type": "integer",
+            "title": "Refund Amount Minor"
+          },
+          "restocking_fee_minor": {
+            "type": "integer",
+            "title": "Restocking Fee Minor"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "payment_method": {
+            "type": "string",
+            "title": "Payment Method"
+          },
+          "original_payment_reference": {
+            "type": "string",
+            "title": "Original Payment Reference"
+          }
+        },
+        "type": "object",
+        "required": [
+          "action",
+          "organization_id",
+          "order_id",
+          "customer_id",
+          "refund_amount_minor",
+          "restocking_fee_minor",
+          "currency",
+          "payment_method",
+          "original_payment_reference"
+        ],
+        "title": "RefundPayload"
+      },
+      "Search": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Question"
+          },
+          "k": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "K",
+            "default": 5
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "Search"
+      },
+      "TokenResponse": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "token_type": {
+            "type": "string",
+            "const": "bearer",
+            "title": "Token Type"
+          },
+          "expires_in": {
+            "type": "integer",
+            "title": "Expires In"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token",
+          "token_type",
+          "expires_in"
+        ],
+        "title": "TokenResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WorkflowResponse": {
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected",
+              "expired",
+              "stale",
+              "executed"
+            ],
+            "title": "Status"
+          },
+          "exact_execution_payload": {
+            "$ref": "#/components/schemas/ExecutionPayload"
+          },
+          "payload_sha256": {
+            "type": "string",
+            "title": "Payload Sha256"
+          },
+          "approval_ttl_seconds": {
+            "type": "integer",
+            "title": "Approval Ttl Seconds"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "assessment": {
+            "$ref": "#/components/schemas/AssessmentResponse"
+          },
+          "result": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Result"
+          },
+          "demo_only": {
+            "type": "boolean",
+            "title": "Demo Only"
+          }
+        },
+        "type": "object",
+        "required": [
+          "workflow_id",
+          "status",
+          "exact_execution_payload",
+          "payload_sha256",
+          "approval_ttl_seconds",
+          "expires_at",
+          "assessment",
+          "result",
+          "demo_only"
+        ],
+        "title": "WorkflowResponse"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

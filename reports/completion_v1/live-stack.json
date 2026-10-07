@@ -1,0 +1,32 @@
+{
+  "scope": "real browser, Next.js, FastAPI, psycopg, official PostgreSQL LangGraph checkpoints and synthetic SQL ledger",
+  "postgres_version": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+  "pgvector_version": "0.8.1",
+  "pglite": true,
+  "retrieval": true,
+  "original_seed_unchanged": true,
+  "synthetic_order_results": [
+    {
+      "order_id": "O-LIVE-approve-09663f77",
+      "refunded_minor": 8500,
+      "refund_state": "refunded"
+    },
+    {
+      "order_id": "O-LIVE-pending-09663f77",
+      "refunded_minor": 0,
+      "refund_state": "none"
+    },
+    {
+      "order_id": "O-LIVE-reject-09663f77",
+      "refunded_minor": 0,
+      "refund_state": "none"
+    },
+    {
+      "order_id": "O-LIVE-stale-09663f77",
+      "refunded_minor": 0,
+      "refund_state": "none"
+    }
+  ],
+  "approved_order_ledger_entries": 1,
+  "credentials_saved_in_report": false
+}

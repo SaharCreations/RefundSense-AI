@@ -1,0 +1,45 @@
+{
+  "status": "completed_with_native_postgres_gate_remaining",
+  "tests": {
+    "tests": 26,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 25
+  },
+  "test_database": {
+    "python": "3.12.14",
+    "postgres_version": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+    "pgvector_version": "0.8.1",
+    "dimensions": 384,
+    "note": "Measured on PostgreSQL 18.3 compiled to WASM via PGlite 0.5.8 with pgvector, connected through psycopg and the PostgreSQL wire protocol. Native PostgreSQL is unavailable in this workspace. PGlite is a test harness, not the application stack."
+  },
+  "not_verified": [
+    "Native PostgreSQL runtime",
+    "SQL constraint-error rollback via native PostgreSQL",
+    "Concurrent database clients or production load"
+  ],
+  "measured_baseline_not_production_readiness": true,
+  "source_file_hashes": {
+    "src/refundguard/__init__.py": "a8cb65510c24481a3090a5707a53440ec3c29cce0fb443c1077bf684ceb5b837",
+    "src/refundguard/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/refundguard/cli.py": "7d75a26475b96ae9338cfc923722e0d48a45b37f704da95708700d2ee435192c",
+    "src/refundguard/corpus.py": "4d518c1ca79f9a09794b4ebfe84e9c65a87db79b8947da2a29c16f42be095cf6",
+    "src/refundguard/dataset.py": "ca852a2f746c8a6b492bc8ee0a8182b9048f55cacbf420e0a55f2196d02a939e",
+    "src/refundguard/embeddings.py": "dcb48cd8661b9911a5aec5f17ea2d6cd7c1968b33895be12a4c6355473e92fa9",
+    "src/refundguard/evaluation.py": "9b3dd396bfb561347c3130c408115630dbaa45f17a44ca7365e1fb865c251d5d",
+    "src/refundguard/metrics.py": "c20310421460efd99f0e388fbaaa9ed22935fab8ac2486b126920ccbce3f23af",
+    "src/refundguard/store.py": "c54e1af78ba60b291023828a2533e43b35e6fc4de4002e544487d44744eac762",
+    "tests/conftest.py": "cc72a031bd9e3b721d98d9a71ec2e474028ab2776091b11292d8a687f872b855",
+    "tests/test_corpus_dataset.py": "7a93b1acfb2a5783b386124de3e0ae3736b754dd8bde70f4ed2d39704e15063c",
+    "tests/test_evaluation_boundary.py": "f8cdb0a3003969ccb6dc544d85c17917f335ab9e7c042cceb501a1c977cfdf91",
+    "tests/test_metrics.py": "2f27cf1f38f19d9b62f5a092ab0cc3b843c843206436e6d428b2cb7c740bb212",
+    "tests/test_store_integration.py": "7ad4c2afc30f9e53b9d59da8352d55ca55c786e694fd2e59e4a7be6a94f06290",
+    "scripts/download_model.py": "9b5df4627887f4e9cd306184f8758427e6c3ae176423c0c4e907fe3c1bde31de"
+  },
+  "seed_byte_comparison": "all original files match exactly",
+  "locked_install": "uv sync --locked --extra dev succeeded",
+  "pinned_model_download": "all five SHA-256 hashes verified; embedding fingerprint matches the measured run",
+  "lint": "ruff check src tests scripts passed",
+  "source_hashes_note": "Final source files. Download-cache metadata is excluded from model fingerprints; the pinned download matches the originally measured fingerprint."
+}

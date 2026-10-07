@@ -1,0 +1,14 @@
+.venv
+.cache
+.local
+.git
+reports
+node_modules
+**/node_modules
+**/.next
+**/test-results
+**/__pycache__
+**/*.tsbuildinfo
+.env*
+**/.env*
+!**/.env.example

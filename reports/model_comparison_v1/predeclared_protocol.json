@@ -1,0 +1,19 @@
+{
+  "version": "local-model-comparison-v1",
+  "candidate_lock_sha256": "f7b9b7dde6448fdf98a127d170525e94b9e3545804815e4f08cc186ebb2164f0",
+  "frozen_explanation_config_sha256": "ae783f997fedadb3ce9e3d2d54cbd1ffd143c55e1bc17346ed75c741dc67d36d",
+  "change": "Model/quantized weights only; prompt, schemas, inference parameters and ranked retrieval unchanged.",
+  "selection_data": "Original 20 development questions only. Both observed heldout sets remain regression diagnostics.",
+  "development_promotion_criteria": {
+    "minimum_answerable_coverage": 0.8125,
+    "minimum_gold_label_citation_precision": 0.9,
+    "required_unknown_abstention_rate": 1.0,
+    "maximum_model_outputs_blocked": 0
+  },
+  "retrieval_report_sha256": {
+    "reports/explanation_v2/dev.json": "0d08e4fa36484c096572e9e62d4539d761410a82ef75aa603063659a997b5f1e",
+    "reports/explanation_v2/supplementary_heldout.json": "6827a044d2d57345444baf9762151b0d04b5139228244ddbeadab8357cf1871e",
+    "reports/explanation_v2/original_heldout_regression.json": "cfd0eb936674c0d75af43963cca46c3db1fd6673e218b206f47a8e41f9e9f31a"
+  },
+  "freeze": "Written before any candidate inference; no tuning on regression outputs or changing gates after seeing results."
+}

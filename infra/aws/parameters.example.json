@@ -1,0 +1,7 @@
+[
+ {"ParameterKey":"ApiImage","ParameterValue":"YOUR_API_ECR_URI@sha256:YOUR_64_HEX_DIGEST"},
+ {"ParameterKey":"WebImage","ParameterValue":"YOUR_WEB_ECR_URI@sha256:YOUR_64_HEX_DIGEST"},
+ {"ParameterKey":"CertificateArn","ParameterValue":"YOUR_REGIONAL_ACM_CERTIFICATE_ARN"},
+ {"ParameterKey":"WebOrigin","ParameterValue":"https://YOUR_DOMAIN"},
+ {"ParameterKey":"ServiceCount","ParameterValue":"0"}
+]

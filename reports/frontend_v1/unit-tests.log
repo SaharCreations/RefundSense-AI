@@ -1,0 +1,81 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> refundguard-review@0.1.0 test
+> node --import tsx --test --test-reporter=tap tests/*.test.ts
+
+TAP version 13
+# Subtest: exact IDs are never trimmed, inferred or populated
+ok 1 - exact IDs are never trimmed, inferred or populated
+  ---
+  duration_ms: 1.225441
+  type: 'test'
+  ...
+# Subtest: approval requires reviewer, pending state, same reviewed hash, and idle UI
+ok 2 - approval requires reviewer, pending state, same reviewed hash, and idle UI
+  ---
+  duration_ms: 0.20628
+  type: 'test'
+  ...
+# Subtest: approval expiry is checked and missing pending expiry is not invented
+ok 3 - approval expiry is checked and missing pending expiry is not invented
+  ---
+  duration_ms: 0.248654
+  type: 'test'
+  ...
+# Subtest: same-origin writes and fixed upstream routes only
+ok 4 - same-origin writes and fixed upstream routes only
+  ---
+  duration_ms: 0.303145
+  type: 'test'
+  ...
+# Subtest: proxy rejects CSRF and anonymous decisions before contacting backend
+ok 5 - proxy rejects CSRF and anonymous decisions before contacting backend
+  ---
+  duration_ms: 6.425154
+  type: 'test'
+  ...
+# Subtest: login response never exposes bearer token, cookie is HttpOnly and strict
+ok 6 - login response never exposes bearer token, cookie is HttpOnly and strict
+  ---
+  duration_ms: 3.095451
+  type: 'test'
+  ...
+# Subtest: cookie supplies backend identity; browser Authorization and redirects do not
+ok 7 - cookie supplies backend identity; browser Authorization and redirects do not
+  ---
+  duration_ms: 0.939602
+  type: 'test'
+  ...
+# Subtest: expired SQL session clears the browser cookie
+ok 8 - expired SQL session clears the browser cookie
+  ---
+  duration_ms: 0.876558
+  type: 'test'
+  ...
+# Subtest: request size limit covers bodies without Content-Length
+ok 9 - request size limit covers bodies without Content-Length
+  ---
+  duration_ms: 0.715585
+  type: 'test'
+  ...
+# Subtest: development Host origin survives Next URL normalization
+ok 10 - development Host origin survives Next URL normalization
+  ---
+  duration_ms: 0.783417
+  type: 'test'
+  ...
+# Subtest: production requires a fixed HTTPS origin and uses Secure session cookies
+ok 11 - production requires a fixed HTTPS origin and uses Secure session cookies
+  ---
+  duration_ms: 1.512483
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 194.369702

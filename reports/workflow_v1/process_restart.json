@@ -1,0 +1,306 @@
+{
+  "status": "passed",
+  "demo_only": true,
+  "postgres_version": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+  "processes": 6,
+  "commands": [
+    {
+      "args": [
+        "workflow-init"
+      ],
+      "returncode": 0
+    },
+    {
+      "args": [
+        "workflow-propose",
+        "--organization-id",
+        "ORG-DEMO",
+        "--user-id",
+        "synthetic-test-reviewer",
+        "--order-id",
+        "O-RESTART-463ecd90",
+        "--customer-id",
+        "C-RESTART-463ecd90"
+      ],
+      "returncode": 0
+    },
+    {
+      "args": [
+        "workflow-view",
+        "--organization-id",
+        "ORG-DEMO",
+        "--user-id",
+        "synthetic-test-reviewer",
+        "--workflow-id",
+        "7d481e9d-8014-4e6b-80c8-ea56ad55b450"
+      ],
+      "returncode": 0
+    },
+    {
+      "args": [
+        "workflow-decide",
+        "--organization-id",
+        "ORG-DEMO",
+        "--user-id",
+        "synthetic-test-reviewer",
+        "--workflow-id",
+        "7d481e9d-8014-4e6b-80c8-ea56ad55b450",
+        "--decision",
+        "approve",
+        "--payload-sha256",
+        "df8040cb0538b69d7e8db9b8bca4ae91534ef433a0f5a73df229632a84e6a6af"
+      ],
+      "returncode": 0
+    },
+    {
+      "args": [
+        "workflow-recover",
+        "--organization-id",
+        "ORG-DEMO",
+        "--user-id",
+        "synthetic-test-reviewer",
+        "--workflow-id",
+        "7d481e9d-8014-4e6b-80c8-ea56ad55b450"
+      ],
+      "returncode": 0
+    },
+    {
+      "args": [
+        "workflow-decide",
+        "--organization-id",
+        "ORG-DEMO",
+        "--user-id",
+        "synthetic-test-reviewer",
+        "--workflow-id",
+        "7d481e9d-8014-4e6b-80c8-ea56ad55b450",
+        "--decision",
+        "approve",
+        "--payload-sha256",
+        "df8040cb0538b69d7e8db9b8bca4ae91534ef433a0f5a73df229632a84e6a6af"
+      ],
+      "returncode": 0
+    }
+  ],
+  "pending": {
+    "workflow_id": "7d481e9d-8014-4e6b-80c8-ea56ad55b450",
+    "status": "pending",
+    "exact_execution_payload": {
+      "refund": {
+        "action": "refund",
+        "currency": "USD",
+        "order_id": "O-RESTART-463ecd90",
+        "customer_id": "C-RESTART-463ecd90",
+        "payment_method": "card",
+        "organization_id": "ORG-DEMO",
+        "refund_amount_minor": 8500,
+        "restocking_fee_minor": 1500,
+        "original_payment_reference": "DEMO-PAYMENT-1001"
+      },
+      "idempotency_key": "e9b7b0bd-d2b1-4f9d-8b34-be5b02980722",
+      "execution_target": "demo_ledger"
+    },
+    "payload_sha256": "df8040cb0538b69d7e8db9b8bca4ae91534ef433a0f5a73df229632a84e6a6af",
+    "approval_ttl_seconds": 900,
+    "expires_at": null,
+    "assessment": {
+      "currency": "USD",
+      "decision": "eligible",
+      "snapshot": {
+        "facts_sha256": "7d7f1906e437d1d02dd8be167eddbffa71582e2f810938c23f2c8d4a1d0df67d",
+        "requested_on": "2026-10-06",
+        "order_revision": 1,
+        "customer_revision": 1
+      },
+      "citations": [
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-1",
+          "version": "3.0",
+          "line_end": 8,
+          "line_start": 6,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        },
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-2",
+          "version": "3.0",
+          "line_end": 12,
+          "line_start": 9,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        },
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-5",
+          "version": "3.0",
+          "line_end": 21,
+          "line_start": 19,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        }
+      ],
+      "conventions": {
+        "scope": "one_physical_item_full_return_only",
+        "status": "synthetic_demo_only",
+        "currency": "USD",
+        "money_unit": "integer_cents",
+        "delivery_day": "day_zero",
+        "ordinary_refund": "item_amount_paid_minus_applicable_restocking_fee",
+        "restocking_base": "item_amount_actually_paid_excluding_shipping_and_tax",
+        "restocking_rounding": "half_up_to_one_cent",
+        "standard_window_last_day": "delivery_plus_30_calendar_days_inclusive",
+        "damage_reporting_last_day": "delivery_plus_7_calendar_days_inclusive"
+      },
+      "reason_code": "standard_return_eligible",
+      "rules_version": "demo-assessment-v1",
+      "assessment_only": true,
+      "candidate_payload": {
+        "action": "refund",
+        "currency": "USD",
+        "order_id": "O-RESTART-463ecd90",
+        "customer_id": "C-RESTART-463ecd90",
+        "payment_method": "card",
+        "organization_id": "ORG-DEMO",
+        "refund_amount_minor": 8500,
+        "restocking_fee_minor": 1500,
+        "original_payment_reference": "DEMO-PAYMENT-1001"
+      },
+      "execution_allowed": false,
+      "refund_amount_minor": 8500,
+      "ruleset_fingerprint": "34030776655202d7fc671f0dce8ef3b9574db8920e371d43316bd6bb9ac07dd3",
+      "restocking_fee_minor": 1500,
+      "human_approval_required_for_execution": true
+    },
+    "result": null,
+    "demo_only": true
+  },
+  "executed": {
+    "workflow_id": "7d481e9d-8014-4e6b-80c8-ea56ad55b450",
+    "status": "executed",
+    "exact_execution_payload": {
+      "refund": {
+        "action": "refund",
+        "currency": "USD",
+        "order_id": "O-RESTART-463ecd90",
+        "customer_id": "C-RESTART-463ecd90",
+        "payment_method": "card",
+        "organization_id": "ORG-DEMO",
+        "refund_amount_minor": 8500,
+        "restocking_fee_minor": 1500,
+        "original_payment_reference": "DEMO-PAYMENT-1001"
+      },
+      "idempotency_key": "e9b7b0bd-d2b1-4f9d-8b34-be5b02980722",
+      "execution_target": "demo_ledger"
+    },
+    "payload_sha256": "df8040cb0538b69d7e8db9b8bca4ae91534ef433a0f5a73df229632a84e6a6af",
+    "approval_ttl_seconds": 900,
+    "expires_at": "2026-10-07T09:13:17.836482+09:00",
+    "assessment": {
+      "currency": "USD",
+      "decision": "eligible",
+      "snapshot": {
+        "facts_sha256": "7d7f1906e437d1d02dd8be167eddbffa71582e2f810938c23f2c8d4a1d0df67d",
+        "requested_on": "2026-10-06",
+        "order_revision": 1,
+        "customer_revision": 1
+      },
+      "citations": [
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-1",
+          "version": "3.0",
+          "line_end": 8,
+          "line_start": 6,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        },
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-2",
+          "version": "3.0",
+          "line_end": 12,
+          "line_start": 9,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        },
+        {
+          "source": "01_refund_policy_current.md",
+          "section": "RP-5",
+          "version": "3.0",
+          "line_end": 21,
+          "line_start": 19,
+          "source_sha256": "54faa299cd208ec11647c94833047836d5cc8a3058ef460f448f21bf0ce2a019"
+        }
+      ],
+      "conventions": {
+        "scope": "one_physical_item_full_return_only",
+        "status": "synthetic_demo_only",
+        "currency": "USD",
+        "money_unit": "integer_cents",
+        "delivery_day": "day_zero",
+        "ordinary_refund": "item_amount_paid_minus_applicable_restocking_fee",
+        "restocking_base": "item_amount_actually_paid_excluding_shipping_and_tax",
+        "restocking_rounding": "half_up_to_one_cent",
+        "standard_window_last_day": "delivery_plus_30_calendar_days_inclusive",
+        "damage_reporting_last_day": "delivery_plus_7_calendar_days_inclusive"
+      },
+      "reason_code": "standard_return_eligible",
+      "rules_version": "demo-assessment-v1",
+      "assessment_only": true,
+      "candidate_payload": {
+        "action": "refund",
+        "currency": "USD",
+        "order_id": "O-RESTART-463ecd90",
+        "customer_id": "C-RESTART-463ecd90",
+        "payment_method": "card",
+        "organization_id": "ORG-DEMO",
+        "refund_amount_minor": 8500,
+        "restocking_fee_minor": 1500,
+        "original_payment_reference": "DEMO-PAYMENT-1001"
+      },
+      "execution_allowed": false,
+      "refund_amount_minor": 8500,
+      "ruleset_fingerprint": "34030776655202d7fc671f0dce8ef3b9574db8920e371d43316bd6bb9ac07dd3",
+      "restocking_fee_minor": 1500,
+      "human_approval_required_for_execution": true
+    },
+    "result": {
+      "status": "executed",
+      "currency": "USD",
+      "demo_only": true,
+      "ledger_id": "2944d681-06fa-42a3-b410-4793ee8986d1",
+      "executed_at": "2026-10-06T23:58:17.859312+00:00",
+      "payload_sha256": "df8040cb0538b69d7e8db9b8bca4ae91534ef433a0f5a73df229632a84e6a6af",
+      "idempotency_key": "e9b7b0bd-d2b1-4f9d-8b34-be5b02980722",
+      "refund_amount_minor": 8500
+    },
+    "demo_only": true
+  },
+  "retry_receipt_matches": true,
+  "ledger_rows": 1,
+  "live_order_after": {
+    "refunded_minor": 8500,
+    "refund_state": "refunded"
+  },
+  "audit_events": [
+    {
+      "actor_id": "synthetic-test-reviewer",
+      "event": "proposed",
+      "detail": {
+        "payload_sha256": "df8040cb0538b69d7e8db9b8bca4ae91534ef433a0f5a73df229632a84e6a6af"
+      }
+    },
+    {
+      "actor_id": "synthetic-test-reviewer",
+      "event": "approved",
+      "detail": {
+        "payload_sha256": "df8040cb0538b69d7e8db9b8bca4ae91534ef433a0f5a73df229632a84e6a6af"
+      }
+    },
+    {
+      "actor_id": "system:demo-ledger",
+      "event": "executed",
+      "detail": {
+        "ledger_id": "2944d681-06fa-42a3-b410-4793ee8986d1",
+        "payload_sha256": "df8040cb0538b69d7e8db9b8bca4ae91534ef433a0f5a73df229632a84e6a6af"
+      }
+    }
+  ],
+  "scope": "Independent CLI processes, sequential retries; not concurrency verification"
+}

@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webm binary
+*.mp4 binary
+
+# Preserve supplied datasets byte for byte and retain raw captured log formatting.
+data/** -text whitespace=cr-at-eol
+reports/**/*.log whitespace=-blank-at-eol,-blank-at-eof
