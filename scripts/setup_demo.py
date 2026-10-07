@@ -26,7 +26,7 @@ def main():
         compose += ["-f", "compose.llm.yaml"]
     run(*compose, "up", "-d", "--build", "db", "api")
     # Model download/ingestion is a deliberate setup operation, never an API side effect.
-    run("uv", "run", "--locked", "python", "scripts/download_model.py")
+    run("uv", "run", "--no-project", "--python", "3.12", "--with", "huggingface-hub==1.33.0", "python", "scripts/download_model.py")
     for cmd in ["seed-demo", "workflow-init", "auth-init"]:
         run(
             *compose,

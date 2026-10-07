@@ -136,7 +136,7 @@ class PolicyStore:
                 (%s = 'all' OR
                  (status = 'CURRENT' AND effective_date <= %s
                   AND (superseded_date IS NULL OR superseded_date >= %s)))
-            ORDER BY distance ASC, source ASC, section ASC, chunk_id ASC
+            ORDER BY distance ASC, source COLLATE "C" ASC, section COLLATE "C" ASC, chunk_id COLLATE "C" ASC
             LIMIT %s""",
             (vector, collection_id, scope, as_of, as_of, k),
         ).fetchall()

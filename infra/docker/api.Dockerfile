@@ -25,7 +25,7 @@ COPY config ./config
 COPY model.lock.json llm.lock.json ./
 COPY scripts ./scripts
 COPY infra/aws/rds-ca.pem /app/infra/aws/rds-ca.pem
-ENV PATH=/app/.venv/bin:$PATH PYTHONPATH=/app/src PYTHONUNBUFFERED=1 ORT_DISABLE_TELEMETRY=1
+ENV PATH=/app/.venv/bin:$PATH PYTHONPATH=/app/src PYTHONUNBUFFERED=1 ORT_DISABLE_TELEMETRY=1 FASTEMBED_CACHE_PATH=/tmp/refundguard-fastembed
 USER app
 EXPOSE 8000
 ENTRYPOINT ["python", "scripts/container_entrypoint.py"]
